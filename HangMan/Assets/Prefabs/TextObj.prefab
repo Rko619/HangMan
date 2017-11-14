@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correctLetter: 0
+  isCorrectLetterUpdated: 0
   correctTextColor: {r: 0.07586217, g: 1, b: 0, a: 1}
 --- !u!222 &222733209537654452
 CanvasRenderer:

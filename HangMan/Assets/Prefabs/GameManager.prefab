@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114189924761500338}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,3 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d5d9d01f4e9db4889e6327092cee79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hangPlace: {fileID: 0}
+  gameStatePrefab: {fileID: 1295407427976132, guid: ef7388b4e5b782946bdd3e6121f597db,
+    type: 2}
+  gamePlayCanvasPrefab: {fileID: 1836701524310746, guid: ad232287b658ab944b01991ea43cd0b6,
+    type: 2}

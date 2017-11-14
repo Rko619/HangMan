@@ -11,7 +11,7 @@ public class KeyboardScript : MonoBehaviour {
 	[SerializeField]
 	private char inputKey;
 	[SerializeField]
-	private GameMode GameMode;
+	private GameMode gameMode;
 	[SerializeField]
 	private Color highlightColor,disabledColor; 
 
@@ -21,16 +21,17 @@ public class KeyboardScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
 	public void SetInputKey()
 	{
-		GameMode.OnKeyPressed (this.gameObject, inputKey);
+		gameMode.OnKeyPressed (this.gameObject, inputKey);
 	}
-	public void HighlightOrDisable(ButtonStates CurrentButtonState)
+	public void HighlightOrDisable(ButtonStates currentButtonState)
 	{
-		if (CurrentButtonState == ButtonStates.Highlight)
+		if (currentButtonState == ButtonStates.Highlight)
 			HighlightButton ();
 		else
 			DisableButton ();

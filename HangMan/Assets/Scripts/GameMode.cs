@@ -29,7 +29,7 @@ public class GameMode : MonoBehaviour {
 	void Start () {
 		correctWord = "RAGHUL";
 		numberOfCharacters = CalculateNumberOfCharacters (correctWord);
-		CreateBlankSpace (numberOfCharacters);
+		SpawnBlankSpace (numberOfCharacters);
 	}
 	
 	// Update is called once per frame
@@ -37,11 +37,13 @@ public class GameMode : MonoBehaviour {
 		
 	}
 
-	public void CreateBlankSpace(int characterLength)
+	public void SpawnBlankSpace(int characterLength)
 	{
 		OutputPanel.GetComponent<RectTransform> ().sizeDelta = new Vector2 (characterLength * (TextObj.GetComponent<RectTransform> ().sizeDelta.x + OutputPanel.GetComponent<HorizontalLayoutGroup> ().spacing), OutputPanel.GetComponent<RectTransform> ().sizeDelta.y);
 		textObjectsRef = new TextObjects[characterLength];
-		for(int i=0;i<characterLength;i++) {
+
+		for(int i=0;i<characterLength;i++)
+        {
 			GameObject currentTextObj=Instantiate (TextObj, OutputPanel.transform);
 			//when starting just put as balnk 
 			currentTextObj.GetComponent<Text> ().text ="__";
@@ -51,45 +53,91 @@ public class GameMode : MonoBehaviour {
 			currentTextObj.GetComponent<TextObjScript> ().correctLetter = textObjectsRef [i].letter;
 		}
 	}
-	public int CalculateNumberOfCharacters(string Word)
+	public int CalculateNumberOfCharacters(string word)
 	{
-		string s = Word;
+		string s = word;
 		return(s.Length);
 	}
-	public char GetCharAtIndex(string InputWord,int InputIndex)
+	public char GetCharAtIndex(string inputWord,int inputIndex)
 	{
-		char[] cArray=InputWord.ToCharArray ();
-		return(cArray[InputIndex]);
+		char[] cArray=inputWord.ToCharArray ();
+		return(cArray[inputIndex]);
 	}
-	bool CompareInputAndWord(char KeyVal)
+	bool CompareInputAndWord(char keyVal)
 	{
 		bool bContainsChar = false;
-		foreach (char c in correctWord.ToCharArray()) {
-			if (KeyVal == c) {
+
+		foreach (char c in correctWord.ToCharArray())
+        {
+			if (keyVal == c)
+            {
 				bContainsChar = true;
 				return bContainsChar;
-			} else
-				bContainsChar = false;
+			}
+            else
+				bContainsChar = false;  
 		}
 		return bContainsChar;
 	}
-	void UpdateLetterInOutputPanel(char LetterToBeUpdated)
+	bool UpdateLetterInOutputPanel(char letterToBeUpdated)
 	{
-		foreach (TextObjects t in textObjectsRef) {
-			if (t.letter == LetterToBeUpdated)
+        bool isWordCompleted = false;
+
+		foreach (TextObjects t in textObjectsRef)
+        {
+			if (t.letter == letterToBeUpdated)
 				t.Textobj.GetComponent<TextObjScript> ().DisplayCorrectLetter ();
 		}
-	}
-	public void OnKeyPressed(GameObject KeyRef,char KeyValue)
+        foreach (TextObjects t in textObjectsRef)
+        {
+            if (t.Textobj.GetComponent<TextObjScript>().isCorrectLetterUpdated)
+            {
+                isWordCompleted = true;
+            }
+            else
+                return (false);
+        }
+        return(isWordCompleted);
+    }
+	public void OnKeyPressed(GameObject keyRef,char keyValue)
 	{
-		if (CompareInputAndWord (KeyValue)) {
-			UpdateLetterInOutputPanel (KeyValue);
-			KeyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Highlight);
-		} else {
+		if (CompareInputAndWord (keyValue))
+        {
+			bool isWordCompleted=UpdateLetterInOutputPanel (keyValue);
+			keyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Highlight);
+
+            if (isWordCompleted)
+                GameManager.LevelCompleted();
+        }
+        else
+        {
 			wrongPressCount = wrongPressCount + 1;
 			HangmanManager.EnablePartsOfHangplace (wrongPressCount);
-			KeyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Disable);
+			keyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Disable);
+
 			if (wrongPressCount == 10)
-				GameManager.GameOver ();}
+			{
+				DisplayCorrectWord();
+				GameManager.GameOver ();
+			}
+				
+        }
 	}
-	}9176781687 tripti
+	void DisplayCorrectWord()
+	{
+		foreach (TextObjects t in textObjectsRef)
+        {
+			if(!t.Textobj.GetComponent<TextObjScript>().isCorrectLetterUpdated)
+				t.Textobj.GetComponent<TextObjScript>().DisplayCorrectLetter();
+		}
+	}
+	int  ChooseWord()
+	{
+		int numberOfCharacters = CalculateNumberOfCharacters (correctWord);
+		return(numberOfCharacters);
+	}
+	public void ChangeWord()
+	{
+		SpawnBlankSpace(ChooseWord());
+	}
+	}

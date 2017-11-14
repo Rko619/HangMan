@@ -4,12 +4,20 @@ using UnityEngine;
 
 public  class GameManager : MonoBehaviour {
 
-	// Use this for initialization
-	public GameObject MenuPanel;
-	public GameObject KeysPanel;
-	public GameObject HangPlace;
-	public GameObject OutputPanel;
-	void Start () {
+	// Use this for initializatiom
+	public GameObject hangPlace;
+
+    [SerializeField]
+    private GameObject gameStatePrefab;
+    [SerializeField]
+    private GameMode gameModeScript;
+    private GameObject gameStateCanvas;
+    [SerializeField]
+    private GameObject gamePlayCanvasPrefab;
+    private GameObject gamePlayCanvas;
+
+	void Start ()
+    {
 		StartGame ();
 	}
 	
@@ -19,7 +27,8 @@ public  class GameManager : MonoBehaviour {
 	}
 	public void StartGame()
 	{
-		MenuPanel.SetActive (false);
+	
+
 	}
 	public void QuitGame()
 	{
@@ -27,11 +36,41 @@ public  class GameManager : MonoBehaviour {
 	}
 	public void GameOver()
 	{
-		Debug.Log ("GameOver");
+        if (!gameStateCanvas)
+        {
+            gameStateCanvas = Instantiate(gameStatePrefab);
+            gameStateCanvas.GetComponent<GameStateCanvasScript>().gameManager = this.gameObject;
+            gameStateCanvas.GetComponent<GameStateCanvasScript>().OnGameOver();
+        }
+        else
+        {
+            gameStateCanvas.GetComponent<GameStateCanvasScript>().OnGameOver();
+        }
+
 	}
 
 	public void LevelCompleted()
 	{
-		
-	}
+        if (!gameStateCanvas)
+        {
+            gameStateCanvas = Instantiate(gameStatePrefab);
+            gameStateCanvas.GetComponent<GameStateCanvasScript>().OnCompleted();
+        }
+        else
+        {
+            gameStateCanvas.GetComponent<GameStateCanvasScript>().OnCompleted();
+        }
+    }
+
+    public void RestartGame()
+    {
+        Destroy(gameStateCanvas,0f);
+        gameModeScript.GetComponent<GameMode>().ChangeWord();
+
+    }
+    public void NextWord()
+    {
+         Destroy(gameStateCanvas,0f);
+        gameModeScript.GetComponent<GameMode>().ChangeWord();
+    }
 }

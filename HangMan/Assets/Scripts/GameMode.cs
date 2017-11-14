@@ -26,14 +26,14 @@ public class GameMode : MonoBehaviour {
 	[SerializeField]
 	private GameManager GameManager;
 
-	void Start () {
-		correctWord = "RAGHUL";
-		numberOfCharacters = CalculateNumberOfCharacters (correctWord);
-		SpawnBlankSpace (numberOfCharacters);
+	void Start () 
+	{
+		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		
 	}
 
@@ -133,8 +133,21 @@ public class GameMode : MonoBehaviour {
 	}
 	int  ChooseWord()
 	{
+		string[] wordArray;
+		string category="Animals";
+		wordArray=new string[JsonReaderWriter.GetNumberOfWords(category)];
+		wordArray=JsonReaderWriter.ReadFromJson(category);
+		correctWord=wordArray[Random.Range(0,wordArray.Length-1)];
+		correctWord=correctWord.ToUpper();
 		int numberOfCharacters = CalculateNumberOfCharacters (correctWord);
 		return(numberOfCharacters);
+	}
+	void DeletePreviousWord()
+	{
+		foreach(TextObjects t in textObjectsRef)
+		{
+			Destroy(t.Textobj,0f);
+		}
 	}
 	public void ChangeWord()
 	{

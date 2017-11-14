@@ -715,6 +715,11 @@ Prefab:
       propertyPath: hangPlace
       value: 
       objectReference: {fileID: 287291584}
+    - target: {fileID: 114189924761500338, guid: 6b6939d17f000484f8b9ac2d9320ad43,
+        type: 2}
+      propertyPath: gameModeScript
+      value: 
+      objectReference: {fileID: 311960103}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b6939d17f000484f8b9ac2d9320ad43, type: 2}
   m_IsPrefabParent: 0

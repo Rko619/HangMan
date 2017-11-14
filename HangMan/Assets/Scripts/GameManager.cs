@@ -27,8 +27,7 @@ public  class GameManager : MonoBehaviour {
 	}
 	public void StartGame()
 	{
-	
-
+        gameModeScript.ChangeWord();
 	}
 	public void QuitGame()
 	{
@@ -54,6 +53,7 @@ public  class GameManager : MonoBehaviour {
         if (!gameStateCanvas)
         {
             gameStateCanvas = Instantiate(gameStatePrefab);
+            gameStateCanvas.GetComponent<GameStateCanvasScript>().gameManager = this.gameObject;
             gameStateCanvas.GetComponent<GameStateCanvasScript>().OnCompleted();
         }
         else

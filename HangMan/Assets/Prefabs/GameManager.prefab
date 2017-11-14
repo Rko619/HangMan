@@ -54,5 +54,6 @@ MonoBehaviour:
   hangPlace: {fileID: 0}
   gameStatePrefab: {fileID: 1295407427976132, guid: ef7388b4e5b782946bdd3e6121f597db,
     type: 2}
+  gameModeScript: {fileID: 0}
   gamePlayCanvasPrefab: {fileID: 1836701524310746, guid: ad232287b658ab944b01991ea43cd0b6,
     type: 2}

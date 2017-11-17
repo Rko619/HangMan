@@ -130,7 +130,9 @@ public class GameMode : MonoBehaviour {
 			if(!t.Textobj.GetComponent<TextObjScript>().isCorrectLetterUpdated)
 				t.Textobj.GetComponent<TextObjScript>().DisplayCorrectLetter();
 		}
+		Debug.Log("this is abishek");
 	}
+
 	int  ChooseWord()
 	{
 		string[] wordArray;

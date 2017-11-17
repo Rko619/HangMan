@@ -13,23 +13,43 @@ public class GameMode : MonoBehaviour {
 	public GameObject Textobj;
 	public char letter;
 	}
-	public TextObjects[] textObjectsRef;	
+
+    [Header("Refrrences for GameManger")]
+    public GameObject gameStatePrefab;
+    public GameMode gameModeScript;
+    public GameObject gamePlayCanvasPrefab;
+    public GameObject hangPlace;
 
 
-	private string correctWord;
+    private TextObjects[] textObjectsRef;
+    private string correctWord;
 	private int numberOfCharacters;
+    [Header("Refrrences for GameMode")]
+    [SerializeField]
+	private GameObject textObj;
 	[SerializeField]
-	private GameObject TextObj;
+	private HangmanManager hangmanManager;
 	[SerializeField]
-	private HangmanManager HangmanManager;
+	private Text scoreText;
+	[SerializeField]
+	private GameManager gameManager;
 	private int wrongPressCount;
-	[SerializeField]
-	private GameManager GameManager;
+	private int wordFoundCount;
+	private int totalNumberOfWords;
+	private List<GameObject> pressedKeys=new List<GameObject>();
+	private bool isWordLoadedFromJson;
+	private string[] wordArray;
+    private string currentHint;
 
 	void Start () 
 	{
-		
 	}
+	void Awake()
+    {
+         gameManager = GameManager.instance;
+        //Debug.Log(gameManager);
+        gameManager.gameModeScript = this;
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -39,12 +59,12 @@ public class GameMode : MonoBehaviour {
 
 	public void SpawnBlankSpace(int characterLength)
 	{
-		OutputPanel.GetComponent<RectTransform> ().sizeDelta = new Vector2 (characterLength * (TextObj.GetComponent<RectTransform> ().sizeDelta.x + OutputPanel.GetComponent<HorizontalLayoutGroup> ().spacing), OutputPanel.GetComponent<RectTransform> ().sizeDelta.y);
+		OutputPanel.GetComponent<RectTransform> ().sizeDelta = new Vector2 (characterLength * (textObj.GetComponent<RectTransform> ().sizeDelta.x + OutputPanel.GetComponent<HorizontalLayoutGroup> ().spacing), OutputPanel.GetComponent<RectTransform> ().sizeDelta.y);
 		textObjectsRef = new TextObjects[characterLength];
 
 		for(int i=0;i<characterLength;i++)
         {
-			GameObject currentTextObj=Instantiate (TextObj, OutputPanel.transform);
+			GameObject currentTextObj=Instantiate (textObj, OutputPanel.transform);
 			//when starting just put as balnk 
 			currentTextObj.GetComponent<Text> ().text ="__";
 			//store textobj in struct array for future use
@@ -101,24 +121,28 @@ public class GameMode : MonoBehaviour {
     }
 	public void OnKeyPressed(GameObject keyRef,char keyValue)
 	{
+		pressedKeys.Add (keyRef);
 		if (CompareInputAndWord (keyValue))
         {
 			bool isWordCompleted=UpdateLetterInOutputPanel (keyValue);
 			keyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Highlight);
 
-            if (isWordCompleted)
-                GameManager.LevelCompleted();
+			if (isWordCompleted) 
+			{
+				wordFoundCount = wordFoundCount + 1;
+				gameManager.LevelCompleted ();
+			}
         }
         else
         {
 			wrongPressCount = wrongPressCount + 1;
-			HangmanManager.EnablePartsOfHangplace (wrongPressCount);
+			hangmanManager.EnablePartsOfHangplace (wrongPressCount);
 			keyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Disable);
 
 			if (wrongPressCount == 10)
 			{
 				DisplayCorrectWord();
-				GameManager.GameOver ();
+				gameManager.GameOver ();
 			}
 				
         }
@@ -133,24 +157,68 @@ public class GameMode : MonoBehaviour {
 	}
 	int  ChooseWord()
 	{
-		string[] wordArray;
-		string category="Animals";
+		if(!isWordLoadedFromJson)
+		{
+        string category=JsonReaderWriter.GetRandomCategory();
 		wordArray=new string[JsonReaderWriter.GetNumberOfWords(category)];
 		wordArray=JsonReaderWriter.ReadFromJson(category);
+		isWordLoadedFromJson=true;
+		}
+		else
+		{
+            List<string> tempWordList = new List<string>();
+			//Removing a word after it is used
+			for(int i=0;i<wordArray.Length;i++)
+			{
+				if(wordArray[i]==correctWord)
+				{
+                    //wordArray[i].Remove(0,i);
+				}
+                else
+                {
+                    tempWordList.Add(wordArray[i]);
+                }
+			}
+            wordArray = new string[0];
+            wordArray = tempWordList.ToArray();
+		}
 		correctWord=wordArray[Random.Range(0,wordArray.Length-1)];
 		correctWord=correctWord.ToUpper();
 		int numberOfCharacters = CalculateNumberOfCharacters (correctWord);
 		return(numberOfCharacters);
 	}
-	void DeletePreviousWord()
+	public void DeletePreviousWord()
 	{
 		foreach(TextObjects t in textObjectsRef)
 		{
 			Destroy(t.Textobj,0f);
 		}
 	}
+	public void ResetPressedKeys()
+	{
+		foreach (GameObject g in pressedKeys) 
+		{
+			g.GetComponent<KeyboardScript> ().ResetKeys ();
+		}
+		pressedKeys.Clear ();
+		wrongPressCount = 0;
+	}
+
 	public void ChangeWord()
 	{
 		SpawnBlankSpace(ChooseWord());
+        UpdateHint();
+		totalNumberOfWords = totalNumberOfWords + 1;
+		UpdateScore ();
 	}
+	void UpdateScore()
+	{
+		string tnw = totalNumberOfWords.ToString ();
+		string wfc = wordFoundCount.ToString ();
+		scoreText.text ="Words Found = "+wfc +" | "+"Total Words = "+ tnw ;
+	}
+    void UpdateHint()
+    {
+
+    }
 	}

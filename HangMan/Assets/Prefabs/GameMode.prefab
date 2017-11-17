@@ -52,7 +52,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OutputPanel: {fileID: 0}
-  textObjectsRef: []
-  TextObj: {fileID: 1448624919642696, guid: d1fb0004339a1204f882dd3f209f285c, type: 2}
-  HangmanManager: {fileID: 0}
-  GameManager: {fileID: 0}
+  gameStatePrefab: {fileID: 1295407427976132, guid: ef7388b4e5b782946bdd3e6121f597db,
+    type: 2}
+  gameModeScript: {fileID: 114280134429563804}
+  gamePlayCanvasPrefab: {fileID: 1836701524310746, guid: ad232287b658ab944b01991ea43cd0b6,
+    type: 2}
+  hangPlace: {fileID: 0}
+  textObj: {fileID: 1448624919642696, guid: d1fb0004339a1204f882dd3f209f285c, type: 2}
+  hangmanManager: {fileID: 0}
+  scoreText: {fileID: 0}
+  gameManager: {fileID: 0}

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEngine;
+using UnityEngine;     
 
 public class GameStateCanvasScript : MonoBehaviour {
 
@@ -53,7 +53,7 @@ public class GameStateCanvasScript : MonoBehaviour {
     }
     public void NextWord()
     {
-         gameManager.GetComponent<GameManager>().NextWord();
+        GameManager.instance.NextWord();
     }
 
 }

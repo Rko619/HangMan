@@ -22,7 +22,7 @@ public static class JsonReaderWriter  {
 		string[] wordArray=new string[wordsData[category].Count];
 		for(int i=0;i<wordArray.Length;i++)
 			{
-				wordArray[i]=wordsData[category][i].ToString();
+				wordArray[i]=wordsData[category][i].ToString().ToUpper();
 			}
 		return(wordArray);
 	
@@ -32,9 +32,14 @@ public static class JsonReaderWriter  {
 	{
 		InitializeJson();
 		wordsData = JsonMapper.ToObject (jsonString);
-		int wordCount=wordsData[category].Count;
+		int wordCount=wordsData["Categories"][category].Count;
 		return(wordCount);
 	}
+    public static string GetRandomCategory()
+    {
+
+        return ("");
+    }
 
 	
 }

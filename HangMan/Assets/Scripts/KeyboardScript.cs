@@ -13,9 +13,12 @@ public class KeyboardScript : MonoBehaviour {
 	[SerializeField]
 	private GameMode gameMode;
 	[SerializeField]
-	private Color highlightColor,disabledColor; 
+	private Color highlightColor,disabledColor,defaultColor;
+    [SerializeField]
+    private string correctButtonPressSoundName,wrongButtonPressSoundName;
 
-	void Start () {
+
+    void Start () {
 		Button Key = GetComponent<Button> ();
 		Key.onClick.AddListener (SetInputKey);
 	}
@@ -31,10 +34,16 @@ public class KeyboardScript : MonoBehaviour {
 	}
 	public void HighlightOrDisable(ButtonStates currentButtonState)
 	{
-		if (currentButtonState == ButtonStates.Highlight)
-			HighlightButton ();
-		else
-			DisableButton ();
+        if (currentButtonState == ButtonStates.Highlight)
+        {
+            AudioManager.instance.PlaySound(correctButtonPressSoundName,false);
+            HighlightButton();
+        }
+        else
+        {
+            AudioManager.instance.PlaySound(wrongButtonPressSoundName,false);
+            DisableButton();
+        }
 			
 	}
 	void HighlightButton()
@@ -46,5 +55,10 @@ public class KeyboardScript : MonoBehaviour {
 	{
 		GetComponent<Button> ().interactable = false;
 		GetComponent<Button> ().image.color = disabledColor;
+	}
+	public void ResetKeys()
+	{
+		GetComponent<Button> ().interactable = true;
+		GetComponent<Button> ().image.color = defaultColor;
 	}
 }

@@ -189,6 +189,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1105143650288156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224180505132907890}
+  - component: {fileID: 222829667443227076}
+  - component: {fileID: 114903033537088960}
+  m_Layer: 5
+  m_Name: HintPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1116995105816204
 GameObject:
   m_ObjectHideFlags: 1
@@ -623,6 +640,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1579543246622130
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224252347872621332}
+  - component: {fileID: 222926651249970468}
+  - component: {fileID: 114293381502684698}
+  m_Layer: 5
+  m_Name: HintText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1589881240992914
 GameObject:
   m_ObjectHideFlags: 1
@@ -671,6 +705,23 @@ GameObject:
   - component: {fileID: 114017520633407584}
   m_Layer: 5
   m_Name: D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1741583427664942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224340167180080896}
+  - component: {fileID: 222234436429895266}
+  - component: {fileID: 114395274757674626}
+  m_Layer: 5
+  m_Name: ScorePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -980,6 +1031,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1972686697943122
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224903686407563898}
+  - component: {fileID: 222039734096042510}
+  - component: {fileID: 114799695079796034}
+  m_Layer: 5
+  m_Name: ScoreIsDisplayedHere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1981573437559686
 GameObject:
   m_ObjectHideFlags: 1
@@ -1064,6 +1132,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114042376241915370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1174,6 +1245,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114062094068495210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1243,6 +1317,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114130663983238086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1803,6 +1880,39 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114293381502684698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1579543246622130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.24313726, g: 0, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Hint
 --- !u!114 &114303954094103058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1911,6 +2021,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114329664399342216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1926,6 +2039,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114332854156171588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2156,6 +2272,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114385820824269704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2197,6 +2316,33 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114395274757674626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741583427664942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114395552181787642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2408,6 +2554,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114520625991476400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2532,6 +2681,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114544720261290586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2547,6 +2699,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114546935051687094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2595,6 +2750,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114552080808565678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2651,6 +2809,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114559293749233098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2786,6 +2947,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114649344561223400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2956,6 +3120,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114678922120152134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2971,6 +3138,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114687802708226198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2986,6 +3156,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114696008244567022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3244,6 +3417,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114745339253376248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3286,6 +3462,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114771446058653206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3342,6 +3521,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114780252069971554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3519,6 +3701,39 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &114799695079796034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972686697943122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.24137926, g: 0, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
 --- !u!114 &114821497634000046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3742,6 +3957,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114876893684213232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3825,6 +4043,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114892842637943646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3899,6 +4120,33 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: T
+--- !u!114 &114903033537088960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105143650288156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114920057316517184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3914,6 +4162,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114929141316805924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4011,6 +4262,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114949760248323022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4026,6 +4280,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114962578490386036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4041,6 +4298,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114964979475906076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4126,6 +4386,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!114 &114998403684490246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4168,6 +4431,9 @@ MonoBehaviour:
   gameMode: {fileID: 0}
   highlightColor: {r: 0.034482718, g: 1, b: 0, a: 1}
   disabledColor: {r: 0.5441177, g: 0.504109, b: 0.504109, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  correctButtonPressSoundName: CorrectButtonPressSound
+  wrongButtonPressSoundName: WrongButtonPressSound
 --- !u!222 &222005962674409268
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -4198,6 +4464,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1981573437559686}
+--- !u!222 &222039734096042510
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972686697943122}
 --- !u!222 &222066548521011562
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -4240,6 +4512,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1459916473441412}
+--- !u!222 &222234436429895266
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741583427664942}
 --- !u!222 &222247251579178434
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -4444,6 +4722,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1479058501442236}
+--- !u!222 &222829667443227076
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105143650288156}
 --- !u!222 &222836731832592398
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -4468,6 +4752,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1068134334737414}
+--- !u!222 &222926651249970468
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1579543246622130}
 --- !u!222 &222948010083537256
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -4772,6 +5062,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224180505132907890
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105143650288156}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -218.6, y: 31.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 224252347872621332}
+  m_Father: {fileID: 224442301821714106}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -218.6, y: 31.4}
+  m_SizeDelta: {x: 170, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224196527177925472
 RectTransform:
   m_ObjectHideFlags: 1
@@ -4844,6 +5153,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224252347872621332
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1579543246622130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.699997, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224180505132907890}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1.7, y: 0}
+  m_SizeDelta: {x: 150, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224267475210688914
 RectTransform:
   m_ObjectHideFlags: 1
@@ -4880,6 +5207,25 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 105.5, y: -25}
   m_SizeDelta: {x: 8, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224340167180080896
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741583427664942}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -164, y: -50.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 224903686407563898}
+  m_Father: {fileID: 224442301821714106}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -164, y: -50.1}
+  m_SizeDelta: {x: 280, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224341470159253890
 RectTransform:
@@ -5001,10 +5347,12 @@ RectTransform:
   m_GameObject: {fileID: 1836701524310746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224938039737997606}
   - {fileID: 224521951803032994}
+  - {fileID: 224340167180080896}
+  - {fileID: 224180505132907890}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5455,6 +5803,24 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 87.5, y: -5}
   m_SizeDelta: {x: 8, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224903686407563898
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972686697943122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.6000061, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224340167180080896}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -140.6, y: 0}
+  m_SizeDelta: {x: 280, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224904661262081820
 RectTransform:

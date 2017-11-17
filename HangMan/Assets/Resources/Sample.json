@@ -1,3 +1,33 @@
 {
-	"Animals":["Cat","Frog"]
+	"Categories": [{
+			"Animals": [
+				"Cat",
+				"Frog",
+				"Dog",
+				"Cow",
+				"alligator",
+				"ant",
+				"bear",
+				"bee",
+				"bird",
+				"camel",
+				"cat",
+				"cheetah",
+				"chicken",
+				"chimpanzee",
+				"cow",
+				"crocodile",
+				"deer"
+
+			]
+		},
+		{
+			"Cars": ["BMW", "Audi"]
+		}
+
+	]
+  "AllCategories": [
+    "Animals",
+    "Cars",
+  ]
 }

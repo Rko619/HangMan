@@ -4,28 +4,41 @@ using UnityEngine;
 
 public  class GameManager : MonoBehaviour {
 
-	// Use this for initializatiom
-	public GameObject hangPlace;
+    // Use this for initializatiom
+    public static GameManager instance;
 
-    [SerializeField]
-    private GameObject gameStatePrefab;
-    [SerializeField]
-    private GameMode gameModeScript;
-    private GameObject gameStateCanvas;
-    [SerializeField]
-    private GameObject gamePlayCanvasPrefab;
-    private GameObject gamePlayCanvas;
+    public GameMode gameModeScript;
+
+    private GameObject _hangPlace;
+    private GameObject _gameStatePrefab;
+    private GameObject _gameStateCanvas;
+    private GameObject _gamePlayCanvasPrefab;
+    private GameObject _gamePlayCanvas;
+    private SceneLoader _sceneLoader;
 
 	void Start ()
     {
-		StartGame ();
+        InitializeRefrrences();
+        StartGame();
 	}
-	
+	void Awake()
+    {
+        instance = this;
+		DontDestroyOnLoad (this.gameObject);
+    }
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
-	public void StartGame()
+    void InitializeRefrrences()
+    {
+        _hangPlace = gameModeScript.hangPlace;
+        _gameStatePrefab = gameModeScript.gameStatePrefab;
+        _gamePlayCanvasPrefab = gameModeScript.gamePlayCanvasPrefab;
+        _sceneLoader = SceneLoader.instance;
+    }
+    public void StartGame()
 	{
         gameModeScript.ChangeWord();
 	}
@@ -35,42 +48,46 @@ public  class GameManager : MonoBehaviour {
 	}
 	public void GameOver()
 	{
-        if (!gameStateCanvas)
+        if (!_gameStateCanvas)
         {
-            gameStateCanvas = Instantiate(gameStatePrefab);
-            gameStateCanvas.GetComponent<GameStateCanvasScript>().gameManager = this.gameObject;
-            gameStateCanvas.GetComponent<GameStateCanvasScript>().OnGameOver();
+            _gameStateCanvas = Instantiate(_gameStatePrefab);
+            _gameStateCanvas.GetComponent<GameStateCanvasScript>().gameManager = this.gameObject;
+            _gameStateCanvas.GetComponent<GameStateCanvasScript>().OnGameOver();
         }
         else
         {
-            gameStateCanvas.GetComponent<GameStateCanvasScript>().OnGameOver();
+            _gameStateCanvas.GetComponent<GameStateCanvasScript>().OnGameOver();
         }
 
 	}
 
 	public void LevelCompleted()
 	{
-        if (!gameStateCanvas)
+        if (!_gameStateCanvas)
         {
-            gameStateCanvas = Instantiate(gameStatePrefab);
-            gameStateCanvas.GetComponent<GameStateCanvasScript>().gameManager = this.gameObject;
-            gameStateCanvas.GetComponent<GameStateCanvasScript>().OnCompleted();
+            _gameStateCanvas = Instantiate(_gameStatePrefab);
+            _gameStateCanvas.GetComponent<GameStateCanvasScript>().gameManager = this.gameObject;
+            _gameStateCanvas.GetComponent<GameStateCanvasScript>().OnCompleted();
         }
         else
         {
-            gameStateCanvas.GetComponent<GameStateCanvasScript>().OnCompleted();
+            _gameStateCanvas.GetComponent<GameStateCanvasScript>().OnCompleted();
         }
     }
 
     public void RestartGame()
     {
-        Destroy(gameStateCanvas,0f);
+		gameModeScript.DeletePreviousWord ();
+		Destroy(_gameStateCanvas,0f);
+		gameModeScript.ResetPressedKeys ();
         gameModeScript.GetComponent<GameMode>().ChangeWord();
 
     }
     public void NextWord()
     {
-         Destroy(gameStateCanvas,0f);
+		gameModeScript.DeletePreviousWord ();
+        Destroy(_gameStateCanvas,0f);
+		gameModeScript.ResetPressedKeys ();
         gameModeScript.GetComponent<GameMode>().ChangeWord();
     }
 }

@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Sandbox\DBTest.cs" />
      <Compile Include="Assets\Scripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameMode.cs" />
@@ -92,17 +93,17 @@
  <Reference Include="LitJson">
  <HintPath>C:/Users/Metarvrse - 3/Documents/GitHub/HangMan/HangMan/Assets/LitJson.dll</HintPath>
  </Reference>
+ <Reference Include="Mono.Data.Sqlite">
+ <HintPath>C:/Users/Metarvrse - 3/Documents/GitHub/HangMan/HangMan/Assets/Mono.Data.Sqlite.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Data">
+ <HintPath>C:/Users/Metarvrse - 3/Documents/GitHub/HangMan/HangMan/Assets/System.Data.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>C:/Users/Metarvrse - 3/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>C:/Users/Metarvrse - 3/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
- </Reference>
- <Reference Include="System.Data">
- <HintPath>C:/Users/Metarvrse - 3/Documents/GitHub/HangMan/HangMan/Assets/System.Data.dll</HintPath>
- </Reference>
- <Reference Include="Mono.Data.Sqlite">
- <HintPath>C:/Users/Metarvrse - 3/Documents/GitHub/HangMan/HangMan/Assets/Mono.Data.Sqlite.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

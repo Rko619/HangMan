@@ -81,6 +81,7 @@ public  class GameManager : MonoBehaviour {
 		Destroy(_gameStateCanvas,0f);
 		gameModeScript.ResetPressedKeys ();
         _hangPlace.GetComponent<HangmanManager>().ResetHangPlace();
+        gameModeScript.GetComponent<GameMode>().totalNumberOfWords = 0;
         gameModeScript.GetComponent<GameMode>().ChangeWord();
 
     }

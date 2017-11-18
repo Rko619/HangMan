@@ -18,6 +18,7 @@ public class GameMode : MonoBehaviour {
     public GameObject gameStatePrefab;
     public GameMode gameModeScript;
     public GameObject gamePlayCanvasPrefab;
+    public int totalNumberOfWords;
     public GameObject hangPlace;
 
 
@@ -35,7 +36,6 @@ public class GameMode : MonoBehaviour {
 	private GameManager gameManager;
 	private int wrongPressCount;
 	private int wordFoundCount;
-	private int totalNumberOfWords;
 	private List<GameObject> pressedKeys=new List<GameObject>();
 	private bool isWordLoadedFromDB;
 	private string[] wordArray;

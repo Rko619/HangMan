@@ -17,16 +17,7 @@ public class SceneLoader : MonoBehaviour
         instance = this;
 		DontDestroyOnLoad (this.gameObject);
 	}
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+   
 
     public void LoadScene(string sceneName)
     {
@@ -43,6 +34,7 @@ public class SceneLoader : MonoBehaviour
 			yield return null;
 		}
         loadingBar.enabled = false;
+        loadingBar.fillAmount = 0;
 	}
 
 }

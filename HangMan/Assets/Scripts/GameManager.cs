@@ -18,7 +18,6 @@ public  class GameManager : MonoBehaviour {
 
 	void Start ()
     {
-		Debug.Log(DBReaderWriter.GetColumnLength ());
         InitializeRefrrences();
         StartGame();
 	}
@@ -81,6 +80,7 @@ public  class GameManager : MonoBehaviour {
 		gameModeScript.DeletePreviousWord ();
 		Destroy(_gameStateCanvas,0f);
 		gameModeScript.ResetPressedKeys ();
+        _hangPlace.GetComponent<HangmanManager>().ResetHangPlace();
         gameModeScript.GetComponent<GameMode>().ChangeWord();
 
     }
@@ -89,6 +89,7 @@ public  class GameManager : MonoBehaviour {
 		gameModeScript.DeletePreviousWord ();
         Destroy(_gameStateCanvas,0f);
 		gameModeScript.ResetPressedKeys ();
+        _hangPlace.GetComponent<HangmanManager>().ResetHangPlace();
         gameModeScript.GetComponent<GameMode>().ChangeWord();
     }
 }

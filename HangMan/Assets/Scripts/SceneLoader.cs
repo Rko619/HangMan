@@ -16,7 +16,6 @@ public class SceneLoader : MonoBehaviour
     {
         instance = this;
 		DontDestroyOnLoad (this.gameObject);
-		//StartCoroutine ("LoadSceneAsync","n");
 	}
     void Start()
     {
@@ -29,15 +28,21 @@ public class SceneLoader : MonoBehaviour
 
     }
 
-	public IEnumerator LoadSceneAsync(string sceneName)
+    public void LoadScene(string sceneName)
+    {
+        StartCoroutine(LoadSceneAsync(sceneName));
+    }
+
+	private IEnumerator LoadSceneAsync(string sceneName)
 	{
-		AsyncOperation operation = SceneManager.LoadSceneAsync ("GamePlayScene");
+        loadingBar.enabled = true;
+        AsyncOperation operation = SceneManager.LoadSceneAsync (sceneName);
 		while (!operation.isDone)
 		{
 			loadingBar.fillAmount = operation.progress;
 			yield return null;
 		}
-		operation.allowSceneActivation = false;
+        loadingBar.enabled = false;
 	}
 
 }

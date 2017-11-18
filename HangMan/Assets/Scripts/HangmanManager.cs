@@ -26,4 +26,11 @@ public class HangmanManager : MonoBehaviour {
 			hangPlaceParts [i].SetActive (true);
 		}
 	}
+    public void ResetHangPlace()
+    {
+        for (int i = 0; i < hangPlaceParts.Length; i++)
+        {
+            hangPlaceParts[i].SetActive(false);
+        }
+    }
 }

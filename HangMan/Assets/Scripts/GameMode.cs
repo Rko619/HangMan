@@ -37,7 +37,7 @@ public class GameMode : MonoBehaviour {
 	private int wordFoundCount;
 	private int totalNumberOfWords;
 	private List<GameObject> pressedKeys=new List<GameObject>();
-	private bool isWordLoadedFromJson;
+	private bool isWordLoadedFromDB;
 	private string[] wordArray;
     private string currentHint;
 
@@ -46,8 +46,7 @@ public class GameMode : MonoBehaviour {
 	}
 	void Awake()
     {
-         gameManager = GameManager.instance;
-        //Debug.Log(gameManager);
+        gameManager = GameManager.instance;
         gameManager.gameModeScript = this;
     }
 	
@@ -130,7 +129,8 @@ public class GameMode : MonoBehaviour {
 			if (isWordCompleted) 
 			{
 				wordFoundCount = wordFoundCount + 1;
-				gameManager.LevelCompleted ();
+                UpdateScore();
+                gameManager.LevelCompleted ();
 			}
         }
         else
@@ -159,12 +159,10 @@ public class GameMode : MonoBehaviour {
 
 	int  ChooseWord()
 	{
-		if(!isWordLoadedFromJson)
+        if (!isWordLoadedFromDB)
 		{
-        string category=JsonReaderWriter.GetRandomCategory();
-		wordArray=new string[JsonReaderWriter.GetNumberOfWords(category)];
-		wordArray=JsonReaderWriter.ReadFromJson(category);
-		isWordLoadedFromJson=true;
+         wordArray = DBReaderWriter.ReadFromDB();
+		 isWordLoadedFromDB=true;
 		}
 		else
 		{
@@ -208,19 +206,14 @@ public class GameMode : MonoBehaviour {
 
 	public void ChangeWord()
 	{
-		SpawnBlankSpace(ChooseWord());
-        UpdateHint();
+        SpawnBlankSpace(ChooseWord());
 		totalNumberOfWords = totalNumberOfWords + 1;
-		UpdateScore ();
-	}
+        UpdateScore();
+    }
 	void UpdateScore()
 	{
 		string tnw = totalNumberOfWords.ToString ();
 		string wfc = wordFoundCount.ToString ();
 		scoreText.text ="Words Found = "+wfc +" | "+"Total Words = "+ tnw ;
 	}
-    void UpdateHint()
-    {
-
-    }
 	}

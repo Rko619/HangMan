@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MainMenuScript : MonoBehaviour {
 
+    [SerializeField]
+    private string gamePlaySceneName;
 	// Use this for initialization
 	void Start () 
 	{
@@ -18,12 +20,12 @@ public class MainMenuScript : MonoBehaviour {
 
 	public void OnClickedPlayButton()
 	{
-		
+        SceneLoader.instance.LoadScene(gamePlaySceneName);
 	}
 	public void OnClickedSettingsButton()
 	{
-		
-	}
+        GameManager.instance.QuitGame();
+    }
 	public void OnClickedQuitButton()
 	{
 		GameManager.instance.QuitGame ();

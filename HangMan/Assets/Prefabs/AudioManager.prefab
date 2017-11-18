@@ -66,3 +66,10 @@ MonoBehaviour:
     pitch: 1
     relatedGameobject: {fileID: 0}
     note: sound played when pressed wrong key
+  - soundName: BackgroundSound
+    sound: {fileID: 8300000, guid: cff31e4a45f6da0408bf8836fbea1755, type: 3}
+    audioSource: {fileID: 0}
+    volume: 0.3
+    pitch: 0.5
+    relatedGameobject: {fileID: 0}
+    note: sound for background

@@ -18,6 +18,7 @@ public  class GameManager : MonoBehaviour {
 
 	void Start ()
     {
+		Debug.Log(DBReaderWriter.GetColumnLength ());
         InitializeRefrrences();
         StartGame();
 	}

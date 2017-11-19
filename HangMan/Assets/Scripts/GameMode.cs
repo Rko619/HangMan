@@ -19,6 +19,7 @@ public class GameMode : MonoBehaviour {
     public GameMode gameModeScript;
     public GameObject gamePlayCanvasPrefab;
     public int totalNumberOfWords;
+	public int wordFoundCount;
     public GameObject hangPlace;
 
 
@@ -35,7 +36,6 @@ public class GameMode : MonoBehaviour {
 	[SerializeField]
 	private GameManager gameManager;
 	private int wrongPressCount;
-	private int wordFoundCount;
 	private List<GameObject> pressedKeys=new List<GameObject>();
 	private bool isWordLoadedFromDB;
 	private string[] wordArray;
@@ -65,7 +65,7 @@ public class GameMode : MonoBehaviour {
         {
 			GameObject currentTextObj=Instantiate (textObj, OutputPanel.transform);
 			//when starting just put as balnk 
-			currentTextObj.GetComponent<Text> ().text ="__";
+			currentTextObj.GetComponent<TextObjScript>().SetDashSprite();
 			//store textobj in struct array for future use
 			textObjectsRef[i].Textobj=currentTextObj;
 			textObjectsRef [i].letter = GetCharAtIndex (correctWord, i);

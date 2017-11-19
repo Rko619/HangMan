@@ -57,8 +57,10 @@ MonoBehaviour:
   gameModeScript: {fileID: 114280134429563804}
   gamePlayCanvasPrefab: {fileID: 1836701524310746, guid: ad232287b658ab944b01991ea43cd0b6,
     type: 2}
+  totalNumberOfWords: 0
+  wordFoundCount: 0
   hangPlace: {fileID: 0}
-  textObj: {fileID: 1448624919642696, guid: d1fb0004339a1204f882dd3f209f285c, type: 2}
+  textObj: {fileID: 1672797424060854, guid: a7bb3513900b4b34fa772b298f6609f7, type: 2}
   hangmanManager: {fileID: 0}
   scoreText: {fileID: 0}
   gameManager: {fileID: 0}

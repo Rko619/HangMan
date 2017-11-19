@@ -9,9 +9,21 @@ public class TextObjScript : MonoBehaviour
 	// Use this for initialization
 	public char correctLetter;
     public bool isCorrectLetterUpdated;
+	[System.Serializable]
+	public struct Alphabets
+	{
+		public string alphabetName;
+		public Sprite alphabetSprite;
+	}
 
 	[SerializeField]
+	private Alphabets[] keyboardAlphabets;
+	[SerializeField]
 	private Color correctTextColor;
+	[SerializeField]
+	private Sprite dashSprite;
+	[SerializeField]
+	private Image alphabetDisplayImage;
 
 	void Start ()
     {
@@ -26,8 +38,20 @@ public class TextObjScript : MonoBehaviour
 
 	public void DisplayCorrectLetter()
 	{
-		GetComponent<Text> ().text = correctLetter.ToString ();
-		GetComponent<Text> ().color = correctTextColor;
+		foreach (Alphabets a in keyboardAlphabets)
+		{
+			if (a.alphabetName == correctLetter.ToString ()) 
+			{
+				alphabetDisplayImage.sprite = a.alphabetSprite;
+				alphabetDisplayImage.SetNativeSize ();
+			}
+		}
         isCorrectLetterUpdated = true;
+	}
+
+	public void SetDashSprite()
+	{
+		alphabetDisplayImage.sprite = dashSprite;
+		alphabetDisplayImage.SetNativeSize ();
 	}
 }

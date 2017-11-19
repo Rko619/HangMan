@@ -59,6 +59,8 @@ public  class GameManager : MonoBehaviour {
             _gameStateCanvas.GetComponent<GameStateCanvasScript>().OnGameOver();
         }
 
+		UpdateHighScore (gameModeScript.GetComponent<GameMode> ().wordFoundCount);
+
 	}
 
 	public void LevelCompleted()
@@ -73,6 +75,8 @@ public  class GameManager : MonoBehaviour {
         {
             _gameStateCanvas.GetComponent<GameStateCanvasScript>().OnCompleted();
         }
+
+		UpdateHighScore (gameModeScript.GetComponent<GameMode> ().wordFoundCount);
     }
 
     public void RestartGame()
@@ -93,4 +97,17 @@ public  class GameManager : MonoBehaviour {
         _hangPlace.GetComponent<HangmanManager>().ResetHangPlace();
         gameModeScript.GetComponent<GameMode>().ChangeWord();
     }
+	public int GetHighScore()
+	{
+		return(PlayerPrefs.GetInt ("HighScore"));
+
+	}
+	public void UpdateHighScore(int newScore)
+	{
+		if (newScore > GetHighScore ()) 
+		{
+			PlayerPrefs.SetInt ("HighScore", newScore);
+			PlayerPrefs.Save ();
+		}
+	}
 }

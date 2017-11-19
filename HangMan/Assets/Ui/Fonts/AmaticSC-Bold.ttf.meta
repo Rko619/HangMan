@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7c8a9e39c3e4f754e8f11fdbc1dde1b8
+timeCreated: 1511091187
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Amatic SC
+  fontNames:
+  - Amatic SC
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

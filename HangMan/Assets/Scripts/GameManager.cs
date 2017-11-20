@@ -15,10 +15,13 @@ public  class GameManager : MonoBehaviour {
     private GameObject _gamePlayCanvasPrefab;
     private GameObject _gamePlayCanvas;
     private SceneLoader _sceneLoader;
+	[SerializeField]
+	private string bgSoundName;
 
 	void Start ()
     {
-        InitializeRefrrences();
+		StartCoroutine ("PlayBgSound");
+		InitializeRefrrences();
         StartGame();
 	}
 	void Awake()
@@ -109,5 +112,11 @@ public  class GameManager : MonoBehaviour {
 			PlayerPrefs.SetInt ("HighScore", newScore);
 			PlayerPrefs.Save ();
 		}
+	}
+	IEnumerator PlayBgSound()
+	{
+		yield return new WaitForSeconds (.1f);
+		AudioManager.instance.PlaySound (bgSoundName,true);
+		yield return null;
 	}
 }

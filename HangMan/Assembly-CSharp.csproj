@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\DBReaderWriter.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameMode.cs" />
+     <Compile Include="Assets\Scripts\GamePlayCanvasScript.cs" />
      <Compile Include="Assets\Scripts\GameStateCanvasScript.cs" />
      <Compile Include="Assets\Scripts\HangmanManager.cs" />
      <Compile Include="Assets\Scripts\KeyboardScript.cs" />

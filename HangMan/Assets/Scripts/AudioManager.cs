@@ -82,7 +82,7 @@ public class AudioManager : MonoBehaviour {
 		{
 			if (soundObj.audioSource.isPlaying) 
 			{
-				soundObj.audioSource.volume = 0;
+				soundObj.audioSource.mute = true;
 			}
 		}
 	}
@@ -92,7 +92,7 @@ public class AudioManager : MonoBehaviour {
 		{
 			if (soundObj.audioSource.isPlaying) 
 			{
-				soundObj.audioSource.volume = soundObj.volume;
+				soundObj.audioSource.mute = false;
 			}
 		}
 	}

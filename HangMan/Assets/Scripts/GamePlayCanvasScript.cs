@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class GamePlayCanvasScript : MonoBehaviour {
@@ -17,7 +18,7 @@ public class GamePlayCanvasScript : MonoBehaviour {
 
 	void Update()
 	{
-		
+
 	}
 	public void OnClickedSpeakerButton()
 	{
@@ -41,6 +42,11 @@ public class GamePlayCanvasScript : MonoBehaviour {
 		{
 			hintPanel.SetActive (true);
 			isHintVisible = true;
+		}
+		else
+		{
+			hintPanel.SetActive (false);
+			isHintVisible = false;
 		}
 	}
 	public void  OnClickedHintCloseButton()

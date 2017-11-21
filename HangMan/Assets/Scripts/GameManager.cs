@@ -129,6 +129,6 @@ public  class GameManager : MonoBehaviour {
 	}
 	void DisplayHighScore()
 	{
-		_highScoreText.text= "HighScore=" + GetHighScore ().ToString ();
+		_highScoreText.text= "HIGHSCORE : " + GetHighScore ().ToString ();
 	}
 }

@@ -217,6 +217,6 @@ public class GameMode : MonoBehaviour {
 	{
 		string tnw = totalNumberOfWords.ToString ();
 		string wfc = wordFoundCount.ToString ();
-		scoreText.text ="Words Found = "+wfc +" | "+"Total Words = "+ tnw ;
+		scoreText.text = "SURVIVED : " + wfc;
 	}
-	}
+}

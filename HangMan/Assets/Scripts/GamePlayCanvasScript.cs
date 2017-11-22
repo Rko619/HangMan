@@ -12,6 +12,8 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	private Sprite normalSpeakerSprite, disabledSpeakerSprite;
 	[SerializeField]
 	private GameObject hintPanel;
+    [SerializeField]
+    private GameObject hintButtonObj;
 	private bool isSoundEnabled=true;
 	private bool isHintVisible = false;
 
@@ -40,6 +42,8 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	{
 		if (!isHintVisible) 
 		{
+            hintButtonObj.GetComponent<Image>().color = new Color(hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.b, 50);
+            hintButtonObj.GetComponent<Button>().interactable = false;
 			hintPanel.SetActive (true);
 			isHintVisible = true;
 		}
@@ -55,6 +59,8 @@ public class GamePlayCanvasScript : MonoBehaviour {
 		{
 			hintPanel.SetActive (false);
 			isHintVisible = false;
-		}
+            hintButtonObj.GetComponent<Image>().color = new Color(hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.b, 255);
+            hintButtonObj.GetComponent<Button>().interactable = true;
+        }
 	}
 }

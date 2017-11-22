@@ -5,8 +5,7 @@ using UnityEngine;
 public class HangmanManager : MonoBehaviour {
 
 	// Use this for initialization
-	[SerializeField]
-	private GameObject[] hangPlaceParts;
+	public GameObject[] hangPlaceParts;
 
 	void Start ()
     {

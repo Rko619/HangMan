@@ -142,7 +142,7 @@ public class GameMode : MonoBehaviour {
 			hangmanManager.EnablePartsOfHangplace (wrongPressCount);
 			keyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Disable);
 
-			if (wrongPressCount == 10)
+			if (wrongPressCount == hangmanManager.hangPlaceParts.Length)
 			{
 				DisplayCorrectWord();
 				gameManager.GameOver ();

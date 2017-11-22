@@ -9,17 +9,13 @@ public class GameStateCanvasScript : MonoBehaviour {
     public GameObject gameManager;
 
     [SerializeField]
-    private Text gameStateText;
+    private Text loseStreakCountText;
     [SerializeField]
-    private Color gameOverTextColor;
+    private Text wonStreakCountText;
     [SerializeField]
-    private Color gameCompletedTextColor;
-
+    private GameObject wonPanel;
     [SerializeField]
-    private GameObject nextButton;
-
-    [SerializeField]
-    private GameObject restartButton;
+    private GameObject losePanel;
 
 	void Start ()
     {
@@ -34,18 +30,16 @@ public class GameStateCanvasScript : MonoBehaviour {
 
     public void OnGameOver()
     {
-        restartButton.SetActive(true);
-        nextButton.SetActive(false);
-        gameStateText.color = gameOverTextColor;
-        gameStateText.text = "Game Over :(";
+        losePanel.SetActive(true);
+        wonPanel.SetActive(false);
+        loseStreakCountText.text = "STREAK : "+gameManager.GetComponent<GameManager>().gameModeScript.wordFoundCount;
     }
 
     public void OnCompleted()
     {
-        restartButton.SetActive(false);
-        nextButton.SetActive(true);
-        gameStateText.color = gameCompletedTextColor;
-        gameStateText.text = "Completed !!!";
+        losePanel.SetActive(false);
+        wonPanel.SetActive(true);
+        wonStreakCountText.text = "STREAK : " + gameManager.GetComponent<GameManager>().gameModeScript.wordFoundCount;
     }
     public void RestartGame()
     {
@@ -54,6 +48,10 @@ public class GameStateCanvasScript : MonoBehaviour {
     public void NextWord()
     {
         GameManager.instance.NextWord();
+    }
+    public void OnClickedMainMenuButton()
+    {
+
     }
 
 }

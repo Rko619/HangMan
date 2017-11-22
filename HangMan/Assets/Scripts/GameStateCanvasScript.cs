@@ -7,11 +7,9 @@ public class GameStateCanvasScript : MonoBehaviour {
 
     // Use this for initialization
     public GameObject gameManager;
+	public Text loseStreakCountText;
+	public Text wonStreakCountText;
 
-    [SerializeField]
-    private Text loseStreakCountText;
-    [SerializeField]
-    private Text wonStreakCountText;
     [SerializeField]
     private GameObject wonPanel;
     [SerializeField]
@@ -39,7 +37,6 @@ public class GameStateCanvasScript : MonoBehaviour {
     {
         losePanel.SetActive(false);
         wonPanel.SetActive(true);
-        wonStreakCountText.text = "STREAK : " + gameManager.GetComponent<GameManager>().gameModeScript.wordFoundCount;
     }
     public void RestartGame()
     {
@@ -51,7 +48,7 @@ public class GameStateCanvasScript : MonoBehaviour {
     }
     public void OnClickedMainMenuButton()
     {
-
+		gameManager.GetComponent<GameManager> ().OnClickedMainMenuButton ();
     }
 
 }

@@ -71,6 +71,7 @@ public  class GameManager : MonoBehaviour {
         }
 
 		UpdateHighScore (gameModeScript.GetComponent<GameMode> ().wordFoundCount);
+		_gameStateCanvas.GetComponent<GameStateCanvasScript>().loseStreakCountText.text = "STREAK : " + gameModeScript.GetComponent<GameMode> ().wordFoundCount;
 
 	}
 
@@ -88,6 +89,8 @@ public  class GameManager : MonoBehaviour {
         }
 
 		UpdateHighScore (gameModeScript.GetComponent<GameMode> ().wordFoundCount);
+
+		_gameStateCanvas.GetComponent<GameStateCanvasScript>().wonStreakCountText.text = "STREAK : " + gameModeScript.GetComponent<GameMode> ().wordFoundCount;
     }
 
     public void RestartGame()
@@ -130,5 +133,16 @@ public  class GameManager : MonoBehaviour {
 	void DisplayHighScore()
 	{
 		_highScoreText.text= "HIGHSCORE : " + GetHighScore ().ToString ();
+	}
+
+	public void OnClickedMainMenuButton()
+	{
+		gameModeScript.DeletePreviousWord ();
+		gameModeScript.ResetPressedKeys ();
+		_hangPlace.GetComponent<HangmanManager>().ResetHangPlace();
+		gameModeScript.GetComponent<GameMode>().totalNumberOfWords = 0;
+		_gamePlayCanvasPrefab.SetActive (false);
+		Destroy (_gameStateCanvas, 0);
+		_mainMenuCanvas.SetActive (true);
 	}
 }

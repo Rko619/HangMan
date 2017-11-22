@@ -17,10 +17,13 @@ public class GameMode : MonoBehaviour {
     [Header("Refrrences for GameManger")]
     public GameObject gameStatePrefab;
     public GameMode gameModeScript;
-    public GameObject gamePlayCanvasPrefab;
+    public GameObject gamePlayCanvas;
     public int totalNumberOfWords;
 	public int wordFoundCount;
     public GameObject hangPlace;
+	public GameObject mainMenuCanvas;
+	public Text highScoreText;
+
 
 
     private TextObjects[] textObjectsRef;
@@ -43,19 +46,19 @@ public class GameMode : MonoBehaviour {
 
 	void Start () 
 	{
+		
 	}
 	void Awake()
     {
         gameManager = GameManager.instance;
         gameManager.gameModeScript = this;
     }
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
 
+	public void StartGame()
+	{
+		SpawnBlankSpace(ChooseWord ());
+		UpdateScore ();
+	}
 	public void SpawnBlankSpace(int characterLength)
 	{
 		OutputPanel.GetComponent<RectTransform> ().sizeDelta = new Vector2 (characterLength * (textObj.GetComponent<RectTransform> ().sizeDelta.x + OutputPanel.GetComponent<HorizontalLayoutGroup> ().spacing), OutputPanel.GetComponent<RectTransform> ().sizeDelta.y);
@@ -214,6 +217,6 @@ public class GameMode : MonoBehaviour {
 	{
 		string tnw = totalNumberOfWords.ToString ();
 		string wfc = wordFoundCount.ToString ();
-		scoreText.text ="Words Found = "+wfc +" | "+"Total Words = "+ tnw ;
+		scoreText.text = "SURVIVED : " + wfc;
 	}
-	}
+}

@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class MainMenuScript : MonoBehaviour {
 
-    [SerializeField]
-    private string gamePlaySceneName;
-	// Use this for initialization
-
 
 	public void OnClickedPlayButton()
 	{
-        SceneLoader.instance.LoadScene(gamePlaySceneName);
+		GameManager.instance.StartGame ();
 	}
 	public void OnClickedSettingsButton()
 	{

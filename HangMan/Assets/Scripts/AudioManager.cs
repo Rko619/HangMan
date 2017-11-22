@@ -20,11 +20,16 @@ public class HangManSounds
     } 
     public void CustomPlaySound(bool islooping)
     {
-        audioSource.volume = volume;
+		audioSource.volume = volume;
         audioSource.pitch = pitch;
         audioSource.loop = islooping;
         audioSource.Play();
     }
+		
+	public void CustomStopSound()
+	{
+		audioSource.Stop ();
+	}
 }
 
 
@@ -48,6 +53,7 @@ public class AudioManager : MonoBehaviour {
             GameObject s = new GameObject(soundsForGame[i].soundName);
             soundsForGame[i].relatedGameobject = s;
             soundsForGame[i].SetAudioSource(s.AddComponent<AudioSource>());
+			s.GetComponent<AudioSource> ().playOnAwake = false;
             s.transform.SetParent(this.transform);
 
         }
@@ -69,4 +75,26 @@ public class AudioManager : MonoBehaviour {
             }
         }
     }
+
+	public void StopSound()
+	{
+		foreach(HangManSounds soundObj in soundsForGame)
+		{
+			if (soundObj.audioSource.isPlaying) 
+			{
+				soundObj.audioSource.mute = true;
+			}
+		}
+	}
+	public void PlayStoppedSounds()
+	{
+		foreach(HangManSounds soundObj in soundsForGame)
+		{
+			if (soundObj.audioSource.isPlaying) 
+			{
+				soundObj.audioSource.mute = false;
+			}
+		}
+	}
+
 }

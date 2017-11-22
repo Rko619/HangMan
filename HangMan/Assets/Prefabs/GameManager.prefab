@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1766458466669302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 804.4906, y: 284.4683, z: 0}
+  m_LocalPosition: {x: 3281, y: 284.4683, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,9 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d5d9d01f4e9db4889e6327092cee79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hangPlace: {fileID: 0}
-  gameStatePrefab: {fileID: 1295407427976132, guid: ef7388b4e5b782946bdd3e6121f597db,
-    type: 2}
   gameModeScript: {fileID: 0}
-  gamePlayCanvasPrefab: {fileID: 1836701524310746, guid: ad232287b658ab944b01991ea43cd0b6,
-    type: 2}
+  bgSoundName: BackgroundSound

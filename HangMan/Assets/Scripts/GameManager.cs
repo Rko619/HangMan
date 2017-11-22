@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public  class GameManager : MonoBehaviour {
@@ -14,12 +15,17 @@ public  class GameManager : MonoBehaviour {
     private GameObject _gameStateCanvas;
     private GameObject _gamePlayCanvasPrefab;
     private GameObject _gamePlayCanvas;
+	private GameObject _mainMenuCanvas;
     private SceneLoader _sceneLoader;
+	[SerializeField]
+	private Text _highScoreText;
+	[SerializeField]
+	private string bgSoundName;
 
 	void Start ()
     {
-        InitializeRefrrences();
-        StartGame();
+		StartCoroutine ("PlayBgSound");
+		InitializeRefrrences();
 	}
 	void Awake()
     {
@@ -35,12 +41,17 @@ public  class GameManager : MonoBehaviour {
     {
         _hangPlace = gameModeScript.hangPlace;
         _gameStatePrefab = gameModeScript.gameStatePrefab;
-        _gamePlayCanvasPrefab = gameModeScript.gamePlayCanvasPrefab;
+        _gamePlayCanvasPrefab = gameModeScript.gamePlayCanvas;
+		_mainMenuCanvas = gameModeScript.mainMenuCanvas;
+		_highScoreText = gameModeScript.highScoreText;
         _sceneLoader = SceneLoader.instance;
     }
     public void StartGame()
 	{
-        gameModeScript.ChangeWord();
+		gameModeScript.StartGame ();
+		_mainMenuCanvas.SetActive (false);
+		_gamePlayCanvasPrefab.SetActive (true);
+		DisplayHighScore ();
 	}
 	public void QuitGame()
 	{
@@ -109,5 +120,15 @@ public  class GameManager : MonoBehaviour {
 			PlayerPrefs.SetInt ("HighScore", newScore);
 			PlayerPrefs.Save ();
 		}
+	}
+	IEnumerator PlayBgSound()
+	{
+		yield return new WaitForSeconds (.1f);
+		AudioManager.instance.PlaySound (bgSoundName,true);
+		yield return null;
+	}
+	void DisplayHighScore()
+	{
+		_highScoreText.text= "HIGHSCORE : " + GetHighScore ().ToString ();
 	}
 }

@@ -17,17 +17,22 @@ public class MainMenuScript : MonoBehaviour {
     private GameObject hintButtonObj;
     private bool isSoundEnabled = true;
     private bool isHintVisible = false;
-
     [SerializeField]
     private Text highScoreText;
 
 
 
 
-
+	void Start()
+	{
+		highScoreText.text = "HIGHSCORE : " + GameManager.instance.GetHighScore ().ToString ();
+	}
     void OnEnable()
     {
-        highScoreText.text = "HIGHSCORE : " + GameManager.instance.GetHighScore().ToString();
+		if (GameManager.instance)
+		{
+			highScoreText.text = "HIGHSCORE : " + GameManager.instance.GetHighScore ().ToString ();
+		}
     }
 	public void OnClickedPlayButton()
 	{

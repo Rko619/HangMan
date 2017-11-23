@@ -11,17 +11,12 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	[SerializeField]
 	private Sprite normalSpeakerSprite, disabledSpeakerSprite;
 	[SerializeField]
-	private GameObject hintPanel;
+	private GameObject yesnoPanel;
     [SerializeField]
-    private GameObject hintButtonObj;
+	private GameObject backButtonObj;
 	private bool isSoundEnabled=true;
-	private bool isHintVisible = false;
 
 
-	void Update()
-	{
-
-	}
 	public void OnClickedSpeakerButton()
 	{
 		if (isSoundEnabled)
@@ -38,29 +33,23 @@ public class GamePlayCanvasScript : MonoBehaviour {
 		}
 	}
 
-	public void OnClickedHintButton()
+	public void OnClickedBackButton()
 	{
-		if (!isHintVisible) 
-		{
-            hintButtonObj.GetComponent<Image>().color = new Color(hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.b, 50);
-            hintButtonObj.GetComponent<Button>().interactable = false;
-			hintPanel.SetActive (true);
-			isHintVisible = true;
-		}
-		else
-		{
-			hintPanel.SetActive (false);
-			isHintVisible = false;
-		}
+        backButtonObj.GetComponent<Image>().color = new Color(backButtonObj.GetComponent<Image>().color.g, backButtonObj.GetComponent<Image>().color.g, backButtonObj.GetComponent<Image>().color.b, 50);
+        backButtonObj.GetComponent<Button>().interactable = false;
+		yesnoPanel.SetActive (true);
 	}
-	public void  OnClickedHintCloseButton()
+	public void  OnClickedYesButton()
 	{
-		if (isHintVisible) 
-		{
-			hintPanel.SetActive (false);
-			isHintVisible = false;
-            hintButtonObj.GetComponent<Image>().color = new Color(hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.b, 255);
-            hintButtonObj.GetComponent<Button>().interactable = true;
-        }
+		backButtonObj.GetComponent<Button>().interactable = true;
+		yesnoPanel.SetActive (false);
+		GameManager.instance.OnClickedMainMenuButton ();
+
+	}
+	public void  OnClickedNoButton()
+	{
+		yesnoPanel.SetActive (false);
+		backButtonObj.GetComponent<Image>().color = new Color(backButtonObj.GetComponent<Image>().color.g, backButtonObj.GetComponent<Image>().color.g, backButtonObj.GetComponent<Image>().color.b, 255);
+		backButtonObj.GetComponent<Button>().interactable = true;
 	}
 }

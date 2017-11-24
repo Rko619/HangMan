@@ -127,7 +127,7 @@ public class GameMode : MonoBehaviour {
 		if (CompareInputAndWord (keyValue))
         {
 			bool isWordCompleted=UpdateLetterInOutputPanel (keyValue);
-			keyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Highlight);
+			keyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Highlight,GetCorrespondingAlphabetObj(keyValue));
 
 			if (isWordCompleted) 
 			{
@@ -140,7 +140,7 @@ public class GameMode : MonoBehaviour {
         {
 			wrongPressCount = wrongPressCount + 1;
 			hangmanManager.EnablePartsOfHangplace (wrongPressCount);
-			keyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Disable);
+			keyRef.GetComponent<KeyboardScript> ().HighlightOrDisable (KeyboardScript.ButtonStates.Disable,null);
 
 			if (wrongPressCount == hangmanManager.hangPlaceParts.Length)
 			{
@@ -154,8 +154,10 @@ public class GameMode : MonoBehaviour {
 	{
 		foreach (TextObjects t in textObjectsRef)
         {
-			if(!t.Textobj.GetComponent<TextObjScript>().isCorrectLetterUpdated)
-				t.Textobj.GetComponent<TextObjScript>().DisplayCorrectLetter();
+            if (!t.Textobj.GetComponent<TextObjScript>().isCorrectLetterUpdated)
+            {
+                t.Textobj.GetComponent<TextObjScript>().DisplayCorrectLetter();
+            }
 		}
 	
 	}
@@ -219,4 +221,17 @@ public class GameMode : MonoBehaviour {
 		string wfc = wordFoundCount.ToString ();
 		scoreText.text = "SURVIVED : " + wfc;
 	}
+
+    GameObject GetCorrespondingAlphabetObj(char keyVal)
+    {
+        foreach (TextObjects t in textObjectsRef)
+        {
+            if(t.letter==keyVal)
+            {
+               return t.Textobj;
+            }
+        }
+
+        return null;
+    }
 }

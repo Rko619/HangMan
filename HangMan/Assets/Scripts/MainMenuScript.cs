@@ -29,10 +29,11 @@ public class MainMenuScript : MonoBehaviour {
 	}
     void OnEnable()
     {
-		if (GameManager.instance)
+		if (GameManager.instance&&AudioManager.instance)
 		{
 			highScoreText.text = "HIGHSCORE : " + GameManager.instance.GetHighScore ().ToString ();
-		}
+            UpdateSoundIconStatus();
+        }
     }
 	public void OnClickedPlayButton()
 	{
@@ -51,13 +52,13 @@ public class MainMenuScript : MonoBehaviour {
     {
         if (isSoundEnabled)
         {
-            AudioManager.instance.StopSound();
+            AudioManager.instance.MuteSounds();
             speakerButtonImage.sprite = disabledSpeakerSprite;
             isSoundEnabled = false;
         }
         else
         {
-            AudioManager.instance.PlayStoppedSounds();
+            AudioManager.instance.UnmuteSounds();
             speakerButtonImage.sprite = normalSpeakerSprite;
             isSoundEnabled = true;
         }
@@ -86,6 +87,20 @@ public class MainMenuScript : MonoBehaviour {
             isHintVisible = false;
             hintButtonObj.GetComponent<Image>().color = new Color(hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.b, 255);
             hintButtonObj.GetComponent<Button>().interactable = true;
+        }
+    }
+
+    void UpdateSoundIconStatus()
+    {
+        if(AudioManager.instance.isAudioMuted)
+        {
+            speakerButtonImage.sprite = disabledSpeakerSprite;
+            isSoundEnabled = false;
+        }
+        else
+        {
+            speakerButtonImage.sprite = normalSpeakerSprite;
+            isSoundEnabled = true;
         }
     }
 }

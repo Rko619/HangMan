@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class KeyboardScript : MonoBehaviour {
 
-	// Use this for initialization
 	public enum ButtonStates {Highlight,Disable};
 
 	[SerializeField]
@@ -13,29 +12,26 @@ public class KeyboardScript : MonoBehaviour {
 	[SerializeField]
 	private GameMode gameMode;
 	[SerializeField]
-	private Color highlightColor,disabledColor,defaultColor;
+	private Color fadeColor,defaultColor;
     [SerializeField]
     private string correctButtonPressSoundName,wrongButtonPressSoundName;
 
 
-    void Start () {
+    void Start ()
+    {
 		Button Key = GetComponent<Button> ();
 		Key.onClick.AddListener (SetInputKey);
 	}
 	
-	// Update is called once per frame
-	void Update ()
-    {
-
-	}
 	public void SetInputKey()
 	{
 		gameMode.OnKeyPressed (this.gameObject, inputKey);
 	}
-	public void HighlightOrDisable(ButtonStates currentButtonState)
+	public void HighlightOrDisable(ButtonStates currentButtonState,GameObject correspondingCorrectCharObj)
 	{
         if (currentButtonState == ButtonStates.Highlight)
         {
+            AnimatedTowardsOutputPanel(correspondingCorrectCharObj);
             AudioManager.instance.PlaySound(correctButtonPressSoundName,false);
             HighlightButton();
         }
@@ -49,16 +45,21 @@ public class KeyboardScript : MonoBehaviour {
 	void HighlightButton()
 	{
 		GetComponent<Button> ().interactable = false;
-		GetComponent<Button> ().image.color = highlightColor;
+		GetComponent<Button> ().image.color = fadeColor;
 	}
 	void DisableButton()
 	{
 		GetComponent<Button> ().interactable = false;
-		GetComponent<Button> ().image.color = disabledColor;
+		GetComponent<Button> ().image.color = fadeColor;
 	}
 	public void ResetKeys()
 	{
 		GetComponent<Button> ().interactable = true;
 		GetComponent<Button> ().image.color = defaultColor;
 	}
+    IEnumerator AnimatedTowardsOutputPanel(GameObject alphabetObj)
+    {
+        Debug.Log("animating ");
+        yield return new WaitForSeconds(0f);
+    }
 }

@@ -17,17 +17,25 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	private bool isSoundEnabled=true;
 
 
-	public void OnClickedSpeakerButton()
+    void OnEnable()
+    {
+        if (GameManager.instance && AudioManager.instance)
+        {
+            UpdateSoundIconStatus();
+        }
+    }
+
+    public void OnClickedSpeakerButton()
 	{
 		if (isSoundEnabled)
 		{
-			AudioManager.instance.StopSound ();
+			AudioManager.instance.MuteSounds ();
 			speakerButtonImage.sprite = disabledSpeakerSprite;
 			isSoundEnabled = false;
 		}
 		else 
 		{
-			AudioManager.instance.PlayStoppedSounds ();
+			AudioManager.instance.UnmuteSounds ();
 			speakerButtonImage.sprite = normalSpeakerSprite;
 			isSoundEnabled = true;
 		}
@@ -52,4 +60,18 @@ public class GamePlayCanvasScript : MonoBehaviour {
 		backButtonObj.GetComponent<Image>().color = new Color(backButtonObj.GetComponent<Image>().color.g, backButtonObj.GetComponent<Image>().color.g, backButtonObj.GetComponent<Image>().color.b, 255);
 		backButtonObj.GetComponent<Button>().interactable = true;
 	}
+
+    void UpdateSoundIconStatus()
+    {
+        if (AudioManager.instance.isAudioMuted)
+        {
+            speakerButtonImage.sprite = disabledSpeakerSprite;
+            isSoundEnabled = false;
+        }
+        else
+        {
+            speakerButtonImage.sprite = normalSpeakerSprite;
+            isSoundEnabled = true;
+        }
+    }
 }

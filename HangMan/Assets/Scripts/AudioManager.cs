@@ -8,7 +8,9 @@ public class HangManSounds
     public string soundName;
     public AudioClip sound;
     public AudioSource audioSource;
+    [Range(0.0F, 1.0F)]
     public float volume;
+    [Range(0.0F, 1.0F)]
     public float pitch;
     public GameObject relatedGameobject;
     public string note; 
@@ -36,7 +38,7 @@ public class HangManSounds
 public class AudioManager : MonoBehaviour {
 
     public static AudioManager instance;
-
+    public bool isAudioMuted=false;
 
     [Header("Sounds for the Game")]
     public HangManSounds[] soundsForGame;
@@ -58,12 +60,7 @@ public class AudioManager : MonoBehaviour {
 
         }
 	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	
-	}
+
     public void PlaySound(string soundName,bool canLoop)
     {
         foreach(HangManSounds soundObj in soundsForGame)
@@ -76,17 +73,18 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-	public void StopSound()
+	public void MuteSounds()
 	{
 		foreach(HangManSounds soundObj in soundsForGame)
 		{
 			if (soundObj.audioSource.isPlaying) 
 			{
 				soundObj.audioSource.mute = true;
-			}
+                isAudioMuted = true;
+            }
 		}
 	}
-	public void PlayStoppedSounds()
+	public void UnmuteSounds()
 	{
 		foreach(HangManSounds soundObj in soundsForGame)
 		{
@@ -95,6 +93,7 @@ public class AudioManager : MonoBehaviour {
 				soundObj.audioSource.mute = false;
 			}
 		}
-	}
+        isAudioMuted = false;
+}
 
 }

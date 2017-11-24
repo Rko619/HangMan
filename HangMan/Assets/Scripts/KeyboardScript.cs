@@ -31,7 +31,7 @@ public class KeyboardScript : MonoBehaviour {
 	{
         if (currentButtonState == ButtonStates.Highlight)
         {
-            AnimatedTowardsOutputPanel(correspondingCorrectCharObj);
+            IEnumerator c=AnimatedTowardsOutputPanel(correspondingCorrectCharObj);
             AudioManager.instance.PlaySound(correctButtonPressSoundName,false);
             HighlightButton();
         }

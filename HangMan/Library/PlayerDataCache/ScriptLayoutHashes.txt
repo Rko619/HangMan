@@ -1,4 +1,4 @@
-WindowsStandalone
+Android
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 970a95104359198fe1a98ef48655de8c UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 8144169769d51429c4aedc8b0f92d47b UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -12,8 +12,8 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 af723155c251fcfa0e66530a75f3ea4c UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 30d914377a78a48e74dd0b9a29cf3be2 Assembly-CSharp.dll:.GameManager
-c29c2db17d7617ab4132339dd05b40ed Assembly-CSharp.dll:.KeyboardScript
-8aa07f1bc4bce5d2f1121bb446a8299e Assembly-CSharp.dll:.AudioManager
+57bf09b607750e2b9c0e627236bab204 Assembly-CSharp.dll:.KeyboardScript
+09bef4703476d755095f5ed9069d96b8 Assembly-CSharp.dll:.AudioManager
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button

@@ -14,6 +14,8 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	private GameObject yesnoPanel;
     [SerializeField]
 	private GameObject backButtonObj;
+	[SerializeField]
+	private Text timerText;
 	private bool isSoundEnabled=true;
 
 
@@ -74,4 +76,9 @@ public class GamePlayCanvasScript : MonoBehaviour {
             isSoundEnabled = true;
         }
     }
+
+	public void DisplayTime()
+	{
+
+	}
 }

@@ -25,6 +25,7 @@ public  class GameManager : MonoBehaviour {
 	void Start ()
     {
 		StartCoroutine ("PlayBgSound");
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		InitializeRefrrences();
 	}
 	void Awake()
@@ -99,8 +100,8 @@ public  class GameManager : MonoBehaviour {
 		Destroy(_gameStateCanvas,0f);
 		gameModeScript.ResetPressedKeys ();
         _hangPlace.GetComponent<HangmanManager>().ResetHangPlace();
-        gameModeScript.GetComponent<GameMode>().totalNumberOfWords = 0;
-        gameModeScript.GetComponent<GameMode>().ChangeWord();
+        gameModeScript.GetComponent<GameMode>().totalNumberOfWordsFound = 0;
+        gameModeScript.GetComponent<GameMode>().StartGame();
 
     }
     public void NextWord()
@@ -109,7 +110,7 @@ public  class GameManager : MonoBehaviour {
         Destroy(_gameStateCanvas,0f);
 		gameModeScript.ResetPressedKeys ();
         _hangPlace.GetComponent<HangmanManager>().ResetHangPlace();
-        gameModeScript.GetComponent<GameMode>().ChangeWord();
+        gameModeScript.GetComponent<GameMode>().StartGame();
     }
 	public int GetHighScore()
 	{
@@ -140,7 +141,7 @@ public  class GameManager : MonoBehaviour {
 		gameModeScript.DeletePreviousWord ();
 		gameModeScript.ResetPressedKeys ();
 		_hangPlace.GetComponent<HangmanManager>().ResetHangPlace();
-		gameModeScript.GetComponent<GameMode>().totalNumberOfWords = 0;
+		gameModeScript.GetComponent<GameMode>().totalNumberOfWordsFound = 0;
 		_gamePlayCanvasPrefab.SetActive (false);
 		Destroy (_gameStateCanvas, 0);
 		_mainMenuCanvas.SetActive (true);

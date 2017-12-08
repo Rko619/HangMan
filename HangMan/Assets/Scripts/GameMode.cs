@@ -14,11 +14,11 @@ public class GameMode : MonoBehaviour {
 	public char letter;
 	}
 
-    [Header("Refrrences for GameManger")]
+    [Header("Refrences for GameManger")]
     public GameObject gameStatePrefab;
     public GameMode gameModeScript;
     public GameObject gamePlayCanvas;
-    public int totalNumberOfWords;
+    public int totalNumberOfWordsFound;
 	public int wordFoundCount;
     public GameObject hangPlace;
 	public GameObject mainMenuCanvas;
@@ -43,20 +43,16 @@ public class GameMode : MonoBehaviour {
 	private bool isWordLoadedFromDB;
 	private string[] wordArray;
     private string currentHint;
+	[SerializeField]
+	private float timeForOneChar;
 
-	void Start () 
-	{
-		
-	}
-	void Awake()
-    {
-        gameManager = GameManager.instance;
-        gameManager.gameModeScript = this;
-    }
+
 
 	public void StartGame()
 	{
-		SpawnBlankSpace(ChooseWord ());
+		int numberOfCharactersInCurrentWord=ChooseWord ();
+		SpawnBlankSpace(numberOfCharactersInCurrentWord);
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().DisplayTime();
 		UpdateScore ();
 	}
 	public void SpawnBlankSpace(int characterLength)
@@ -212,12 +208,12 @@ public class GameMode : MonoBehaviour {
 	public void ChangeWord()
 	{
         SpawnBlankSpace(ChooseWord());
-		totalNumberOfWords = totalNumberOfWords + 1;
+		totalNumberOfWordsFound = totalNumberOfWordsFound + 1;
         UpdateScore();
     }
 	void UpdateScore()
 	{
-		string tnw = totalNumberOfWords.ToString ();
+		string tnw = totalNumberOfWordsFound.ToString ();
 		string wfc = wordFoundCount.ToString ();
 		scoreText.text = "SURVIVED : " + wfc;
 	}
@@ -234,4 +230,9 @@ public class GameMode : MonoBehaviour {
 
         return null;
     }
+
+	void CalculateTimeNeeded()
+	{
+		
+	}
 }

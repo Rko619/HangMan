@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 114548303643389954}
   - component: {fileID: 114448892197126014}
   - component: {fileID: 114079446876220720}
+  - component: {fileID: 114174504381956942}
   m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
@@ -239,6 +240,27 @@ MonoBehaviour:
   hintPanel: {fileID: 1250651105001606}
   hintButtonObj: {fileID: 1780866569598494}
   highScoreText: {fileID: 114995000478164788}
+--- !u!114 &114174504381956942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1531310717914132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
 --- !u!114 &114190330042013434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -859,7 +881,7 @@ Canvas:
   m_GameObject: {fileID: 1531310717914132}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 84
   m_PixelPerfect: 1
@@ -869,7 +891,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224042243362508672
 RectTransform:

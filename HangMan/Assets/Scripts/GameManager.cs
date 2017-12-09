@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -115,8 +116,19 @@ public  class GameManager : MonoBehaviour {
 	public int GetHighScore()
 	{
 		return(PlayerPrefs.GetInt ("HighScore"));
-
 	}
+
+	public int GetHintValue()
+	{
+		int hintVal=PlayerPrefs.GetInt ("HintValue");
+		return hintVal;
+	}
+
+	public void UpdateHintCount(int newHintVal)
+	{
+		PlayerPrefs.SetInt ("HintValue", newHintVal);
+	}
+
 	public void UpdateHighScore(int newScore)
 	{
 		if (newScore > GetHighScore ()) 
@@ -146,4 +158,6 @@ public  class GameManager : MonoBehaviour {
 		Destroy (_gameStateCanvas, 0);
 		_mainMenuCanvas.SetActive (true);
 	}
+
+	
 }

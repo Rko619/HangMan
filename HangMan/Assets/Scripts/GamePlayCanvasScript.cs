@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GamePlayCanvasScript : MonoBehaviour {
 
+	public bool isTimedOut;
+
 	[SerializeField]
 	private Image speakerButtonImage;
 	[SerializeField]
@@ -16,6 +18,12 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	private GameObject backButtonObj;
 	[SerializeField]
 	private Text timerText;
+	[SerializeField]
+	private Text hintText;
+	[SerializeField]
+	private Button hintButton;
+	[SerializeField]
+	private Color normalTimeColor;
 	private bool isSoundEnabled=true;
 
 
@@ -26,6 +34,11 @@ public class GamePlayCanvasScript : MonoBehaviour {
             UpdateSoundIconStatus();
         }
     }
+
+	void Start()
+	{
+		hintButton.onClick.AddListener (OnClickedHintButton);
+	}
 
     public void OnClickedSpeakerButton()
 	{
@@ -79,6 +92,38 @@ public class GamePlayCanvasScript : MonoBehaviour {
 
 	public void DisplayTime()
 	{
-
+		TimeManagerScript.timeManagerScriptInstance.OnTimerUpdated += UpdateTimeInfo;
+		TimeManagerScript.timeManagerScriptInstance.OnTimerFinished += onTimedOut;
+		timerText.color =normalTimeColor;
+		isTimedOut = false;
 	}
+
+	void UpdateTimeInfo()
+	{
+		timerText.text = TimeManagerScript.timeManagerScriptInstance.currentTime.ToString();
+	}
+
+	void OnClickedHintButton()
+	{
+		//Reduce hint value by 1 when hint is clicked
+		if(GameManager.instance.GetHintValue()>0)
+		{
+		GameManager.instance.gameModeScript.RevealChar();
+		GameManager.instance.UpdateHintCount(GameManager.instance.GetHintValue()-1);
+		}
+		DisplayHint();
+	}
+
+	void onTimedOut()
+	{
+		timerText.text = "00:00";
+		isTimedOut = true;
+		timerText.color = normalTimeColor;
+	}
+
+	public void DisplayHint()
+	{
+		hintText.text=GameManager.instance.GetHintValue().ToString();
+	}
+
 }

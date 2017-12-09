@@ -9,7 +9,8 @@ public class GameMode : MonoBehaviour {
 	public GameObject OutputPanel;
 
 	[System.Serializable]
-	public struct TextObjects{
+	public struct TextObjects
+	{
 	public GameObject Textobj;
 	public char letter;
 	}
@@ -52,7 +53,9 @@ public class GameMode : MonoBehaviour {
 	{
 		int numberOfCharactersInCurrentWord=ChooseWord ();
 		SpawnBlankSpace(numberOfCharactersInCurrentWord);
+		TimeManagerScript.timeManagerScriptInstance.StartTimer(CalculateTimeNeeded(numberOfCharactersInCurrentWord));
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().DisplayTime();
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().DisplayHint();
 		UpdateScore ();
 	}
 	public void SpawnBlankSpace(int characterLength)
@@ -104,7 +107,10 @@ public class GameMode : MonoBehaviour {
 		foreach (TextObjects t in textObjectsRef)
         {
 			if (t.letter == letterToBeUpdated)
+			{
 				t.Textobj.GetComponent<TextObjScript> ().DisplayCorrectLetter ();
+				t.Textobj.GetComponent<TextObjScript> ().isCorrectLetterUpdated=true;
+			}
 		}
         foreach (TextObjects t in textObjectsRef)
         {
@@ -230,9 +236,28 @@ public class GameMode : MonoBehaviour {
 
         return null;
     }
-
-	void CalculateTimeNeeded()
+	public void RevealChar()
 	{
-		
+		string newWord="";
+		foreach (TextObjects t in textObjectsRef)
+        {
+			if(!t.Textobj.GetComponent<TextObjScript>().isCorrectLetterUpdated)
+			{
+				newWord+=t.letter;
+			}
+		}
+		int length=newWord.Length;
+		char[] c=newWord.ToCharArray();
+		int n=Random.Range(0,length-1);
+		char cr=c[n];
+		//finding keyboard letter gameobject corresponding car
+		GameObject k=GameObject.FindGameObjectWithTag(cr.ToString());
+		OnKeyPressed(k,cr);
 	}
+	float CalculateTimeNeeded(int numberOfCharactersInWord)
+	{
+		float totalTime = timeForOneChar * (float)numberOfCharactersInWord;
+		return(totalTime);	
+	}
+
 }

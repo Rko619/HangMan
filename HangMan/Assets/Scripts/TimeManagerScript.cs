@@ -7,14 +7,20 @@ public class TimeManagerScript : MonoBehaviour {
 	public static TimeManagerScript timeManagerScriptInstance;
 	
 	public float currentTime;
+
 	public delegate void TimerFinished();
 	public TimerFinished OnTimerFinished;
+
+	public delegate void TimerUpdate();
+	public TimerUpdate OnTimerUpdated ;
+
 	private float timerDuration,startTime;
 	private bool canUpdateTime;
+
+
 	void Start () 
 	{
 		timeManagerScriptInstance=this;	
-		StartTimer(20);	
 	}
 	
 	void FixedUpdate () 
@@ -26,7 +32,8 @@ public class TimeManagerScript : MonoBehaviour {
 				StopTimer();
 				return;
 			}
-			currentTime=Mathf.Round((timerDuration-(Time.time-startTime))*100f)/100f;			
+			currentTime=Mathf.Round((timerDuration-(Time.time-startTime))*100f)/100f;
+			OnTimerUpdated ();
 		}	
 	}
 
@@ -44,4 +51,5 @@ public class TimeManagerScript : MonoBehaviour {
 		canUpdateTime=false;
 		OnTimerFinished();
 	}
+
 }

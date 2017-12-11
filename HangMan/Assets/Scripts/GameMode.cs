@@ -24,11 +24,14 @@ public class GameMode : MonoBehaviour {
     public GameObject hangPlace;
 	public GameObject mainMenuCanvas;
 	public Text highScoreText;
+	public string correctWord;
+	public bool isInGame;
+
+
 
 
 
     private TextObjects[] textObjectsRef;
-    private string correctWord;
 	private int numberOfCharacters;
     [Header("Refrrences for GameMode")]
     [SerializeField]
@@ -43,7 +46,6 @@ public class GameMode : MonoBehaviour {
 	private List<GameObject> pressedKeys=new List<GameObject>();
 	private bool isWordLoadedFromDB;
 	private string[] wordArray;
-    private string currentHint;
 	[SerializeField]
 	private float timeForOneChar;
 
@@ -51,20 +53,33 @@ public class GameMode : MonoBehaviour {
 
 	public void StartGame()
 	{
+		StartCoroutine("StartWithDelay");
+	}
+
+	IEnumerator StartWithDelay()
+	{
 		int numberOfCharactersInCurrentWord=ChooseWord ();
-		SpawnBlankSpace(numberOfCharactersInCurrentWord);
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().ResetAnswerPos();
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().ResetTime();
+		
+
+		yield return (SpawnBlankSpace(numberOfCharactersInCurrentWord));
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().AnimateKeysScaleUp();
 		TimeManagerScript.timeManagerScriptInstance.StartTimer(CalculateTimeNeeded(numberOfCharactersInCurrentWord));
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().DisplayTime();
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().DisplayHint();
 		UpdateScore ();
+		isInGame=true;
 	}
-	public void SpawnBlankSpace(int characterLength)
+
+	public IEnumerator SpawnBlankSpace(int characterLength)
 	{
 		OutputPanel.GetComponent<RectTransform> ().sizeDelta = new Vector2 (characterLength * (textObj.GetComponent<RectTransform> ().sizeDelta.x + OutputPanel.GetComponent<HorizontalLayoutGroup> ().spacing), OutputPanel.GetComponent<RectTransform> ().sizeDelta.y);
 		textObjectsRef = new TextObjects[characterLength];
 
 		for(int i=0;i<characterLength;i++)
         {
+			yield return new WaitForSeconds(.1f);
 			GameObject currentTextObj=Instantiate (textObj, OutputPanel.transform);
 			//when starting just put as balnk 
 			currentTextObj.GetComponent<TextObjScript>().SetDashSprite();
@@ -73,7 +88,9 @@ public class GameMode : MonoBehaviour {
 			textObjectsRef [i].letter = GetCharAtIndex (correctWord, i);
 			currentTextObj.GetComponent<TextObjScript> ().correctLetter = textObjectsRef [i].letter;
 		}
+		yield return new WaitForSeconds(0f);
 	}
+	
 	public int CalculateNumberOfCharacters(string word)
 	{
 		string s = word;
@@ -133,9 +150,7 @@ public class GameMode : MonoBehaviour {
 
 			if (isWordCompleted) 
 			{
-				wordFoundCount = wordFoundCount + 1;
-                UpdateScore();
-                gameManager.LevelCompleted ();
+				CompletedChallenge();
 			}
         }
         else
@@ -146,8 +161,7 @@ public class GameMode : MonoBehaviour {
 
 			if (wrongPressCount == hangmanManager.hangPlaceParts.Length)
 			{
-				DisplayCorrectWord();
-				gameManager.GameOver ();
+				ChallengeNotCompleted();
 			}
 				
         }
@@ -203,10 +217,7 @@ public class GameMode : MonoBehaviour {
 	}
 	public void ResetPressedKeys()
 	{
-		foreach (GameObject g in pressedKeys) 
-		{
-			g.GetComponent<KeyboardScript> ().ResetKeys ();
-		}
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().AnimateKeysScaleUp();
 		pressedKeys.Clear ();
 		wrongPressCount = 0;
 	}
@@ -258,6 +269,45 @@ public class GameMode : MonoBehaviour {
 	{
 		float totalTime = timeForOneChar * (float)numberOfCharactersInWord;
 		return(totalTime);	
+	}
+
+	void CompletedChallenge()
+	{
+		isInGame=false;
+
+		TimeManagerScript.timeManagerScriptInstance.StopTimer();
+
+		wordFoundCount = wordFoundCount + 1;
+
+		if(!gamePlayCanvas.GetComponent<GamePlayCanvasScript>().isTimedOut)
+		{
+			GameManager.instance.UpdateHintCount(GameManager.instance.GetHintValue()+1);
+		}
+
+		UpdateScore();
+
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().AnimateKeysScaleDown();	
+
+		IEnumerator i=gamePlayCanvas.GetComponent<GamePlayCanvasScript>().ShowUserCorrectWord();		
+		StartCoroutine(i);
+
+		gameManager.Invoke("LevelCompleted",3f);
+	}
+
+	void ChallengeNotCompleted()
+	{
+		isInGame=false;
+
+		TimeManagerScript.timeManagerScriptInstance.StopTimer();
+
+		DisplayCorrectWord();
+
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().AnimateKeysScaleDown();
+
+		IEnumerator i=gamePlayCanvas.GetComponent<GamePlayCanvasScript>().ShowUserCorrectWord();		
+		StartCoroutine(i);
+
+		gameManager.Invoke("GameOver",3f);
 	}
 
 }

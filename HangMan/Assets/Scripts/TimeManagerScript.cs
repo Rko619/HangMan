@@ -16,6 +16,7 @@ public class TimeManagerScript : MonoBehaviour {
 
 	private float timerDuration,startTime;
 	private bool canUpdateTime;
+	
 
 
 	void Start () 
@@ -44,7 +45,7 @@ public class TimeManagerScript : MonoBehaviour {
 		canUpdateTime=true;
 	}
 
-	void StopTimer()
+	public void StopTimer()
 	{
 		timerDuration=0;
 		startTime=0;

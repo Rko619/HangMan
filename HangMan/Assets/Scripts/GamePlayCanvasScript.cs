@@ -24,6 +24,10 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	private Button hintButton;
 	[SerializeField]
 	private Color normalTimeColor;
+	[SerializeField]
+	private GameObject[] keys;
+	[SerializeField]
+	private Transform wordNormalPos,wordEndPos,answerTransform;
 	private bool isSoundEnabled=true;
 
 
@@ -106,7 +110,7 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	void OnClickedHintButton()
 	{
 		//Reduce hint value by 1 when hint is clicked
-		if(GameManager.instance.GetHintValue()>0)
+		if(GameManager.instance.GetHintValue()>0&&(GameManager.instance.gameModeScript.isInGame))
 		{
 		GameManager.instance.gameModeScript.RevealChar();
 		GameManager.instance.UpdateHintCount(GameManager.instance.GetHintValue()-1);
@@ -116,7 +120,7 @@ public class GamePlayCanvasScript : MonoBehaviour {
 
 	void onTimedOut()
 	{
-		timerText.text = "00:00";
+		//timerText.text = "00:00";
 		isTimedOut = true;
 		timerText.color = normalTimeColor;
 	}
@@ -125,5 +129,51 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	{
 		hintText.text=GameManager.instance.GetHintValue().ToString();
 	}
+
+	public void AnimateKeysScaleDown()
+	{
+		foreach(GameObject g in keys)
+		{
+			g.GetComponent<KeyboardScript>().AnimateScaleDown();
+		}
+	}
+
+	public void AnimateKeysScaleUp()
+	{
+		foreach(GameObject g in keys)
+		{
+			g.GetComponent<KeyboardScript>().AnimateScaleUp();
+		}
+	}
+
+	public IEnumerator ShowUserCorrectWord()
+	{
+		 float elapsedTime =0;
+		 float time=3f;
+     	 Vector3 startingPos = transform.position;
+    	 while (elapsedTime < time)
+     	{
+         answerTransform.position = Vector3.Slerp(answerTransform.position, wordEndPos.position, (elapsedTime / time));
+         elapsedTime += Time.deltaTime;
+         yield return null;
+		 }
+
+		yield return new WaitForSeconds(0f);
+	}
+
+	public void ResetAnswerPos()
+	{
+		answerTransform.position=wordNormalPos.position;
+	}
+
+	public void ResetTime()
+	{
+		timerText.text = "00:00";
+	}
+
+	void OnDisable()
+	{
+        //GameManager.instance.gameModeScript.CancelInvoke();
+    }
 
 }

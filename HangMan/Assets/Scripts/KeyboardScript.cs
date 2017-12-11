@@ -19,6 +19,7 @@ public class KeyboardScript : MonoBehaviour {
 
     void Start ()
     {
+		PlayerPrefs.SetInt("HintValue",1);
 		Button Key = GetComponent<Button> ();
 		Key.onClick.AddListener (SetInputKey);
 	}
@@ -31,13 +32,14 @@ public class KeyboardScript : MonoBehaviour {
 	{
         if (currentButtonState == ButtonStates.Highlight)
         {
-            IEnumerator c=AnimatedTowardsOutputPanel(correspondingCorrectCharObj);
             AudioManager.instance.PlaySound(correctButtonPressSoundName,false);
+			AnimateScaleDown();
             HighlightButton();
         }
         else
         {
             AudioManager.instance.PlaySound(wrongButtonPressSoundName,false);
+			AnimateScaleDown();
             DisableButton();
         }
 			
@@ -45,21 +47,32 @@ public class KeyboardScript : MonoBehaviour {
 	void HighlightButton()
 	{
 		GetComponent<Button> ().interactable = false;
-		GetComponent<Button> ().image.color = fadeColor;
+		//GetComponent<Button> ().image.color = fadeColor;
 	}
 	void DisableButton()
 	{
 		GetComponent<Button> ().interactable = false;
-		GetComponent<Button> ().image.color = fadeColor;
+		//GetComponent<Button> ().image.color = fadeColor;
 	}
+
+	public void AnimateScaleDown()
+	{
+		iTween.ScaleTo(gameObject,new Vector3(0,0,0),2f);
+		GetComponent<Button> ().interactable = false;
+
+	}
+	public void AnimateScaleUp()
+	{
+		iTween.ScaleTo(gameObject,new Vector3(1,1,1),2f);
+		GetComponent<Button> ().interactable = true;
+
+	}
+
 	public void ResetKeys()
 	{
+		AnimateScaleUp();
 		GetComponent<Button> ().interactable = true;
 		GetComponent<Button> ().image.color = defaultColor;
 	}
-    IEnumerator AnimatedTowardsOutputPanel(GameObject alphabetObj)
-    {
-        Debug.Log("animating ");
-        yield return new WaitForSeconds(0f);
-    }
+ 
 }

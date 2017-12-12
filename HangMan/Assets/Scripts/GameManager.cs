@@ -8,6 +8,11 @@ public  class GameManager : MonoBehaviour {
 
     // Use this for initializatiom
     public static GameManager instance;
+	public delegate void OnHighScoreChanged(int updatedHighScore);
+	public OnHighScoreChanged onHighScoreChanged;
+
+	public delegate void OnHintValueChanged(int updatedHintValue);
+	public OnHighScoreChanged onHintValueChanged;
 
     public GameMode gameModeScript;
 
@@ -18,34 +23,50 @@ public  class GameManager : MonoBehaviour {
     private GameObject _gamePlayCanvas;
 	private GameObject _mainMenuCanvas;
     private SceneLoader _sceneLoader;
-	[SerializeField]
-	private Text _highScoreText;
+
 	[SerializeField]
 	private string bgSoundName;
 
+	[Header("These are for Loading MainMenuLevel")]
+	[SerializeField]
+	private string MainMenuLevel;
+	[SerializeField]
+	private float timeAfterLoad;
 	void Start ()
     {
 		StartCoroutine ("PlayBgSound");
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
-		InitializeRefrrences();
+		//InitializeRefrrences();
+		DontDestroyOnLoad (gameObject);
 	}
 	void Awake()
-    {
-        instance = this;
-		DontDestroyOnLoad (this.gameObject);
-    }
+	{
+		//Check if instance already exists
+		if (instance == null)
+
+			//if not, set instance to this
+			instance = this;
+
+		//If instance already exists and it's not this:
+		else if (instance != this)
+
+			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+			Destroy (gameObject);    
+
+		//Sets this to not be destroyed when reloading scene
+		DontDestroyOnLoad (gameObject);
+	}
 	// Update is called once per frame
 	void Update ()
     {
 		
 	}
-    void InitializeRefrrences()
+    public void InitializeRefrrences()
     {
         _hangPlace = gameModeScript.hangPlace;
         _gameStatePrefab = gameModeScript.gameStatePrefab;
         _gamePlayCanvasPrefab = gameModeScript.gamePlayCanvas;
 		_mainMenuCanvas = gameModeScript.mainMenuCanvas;
-		_highScoreText = gameModeScript.highScoreText;
         _sceneLoader = SceneLoader.instance;
     }
     public void StartGame()
@@ -53,7 +74,6 @@ public  class GameManager : MonoBehaviour {
 		gameModeScript.StartGame ();
 		_mainMenuCanvas.SetActive (false);
 		_gamePlayCanvasPrefab.SetActive (true);
-		DisplayHighScore ();
 	}
 	public void QuitGame()
 	{
@@ -127,6 +147,7 @@ public  class GameManager : MonoBehaviour {
 	public void UpdateHintCount(int newHintVal)
 	{
 		PlayerPrefs.SetInt ("HintValue", newHintVal);
+		onHintValueChanged (newHintVal);
 	}
 
 	public void UpdateHighScore(int newScore)
@@ -135,6 +156,7 @@ public  class GameManager : MonoBehaviour {
 		{
 			PlayerPrefs.SetInt ("HighScore", newScore);
 			PlayerPrefs.Save ();
+			onHighScoreChanged (newScore);
 		}
 	}
 	IEnumerator PlayBgSound()
@@ -143,21 +165,30 @@ public  class GameManager : MonoBehaviour {
 		AudioManager.instance.PlaySound (bgSoundName,true);
 		yield return null;
 	}
-	void DisplayHighScore()
-	{
-		_highScoreText.text= "HIGHSCORE : " + GetHighScore ().ToString ();
-	}
+
 
 	public void OnClickedMainMenuButton()
 	{
-		gameModeScript.DeletePreviousWord ();
-		gameModeScript.ResetPressedKeys ();
-		_hangPlace.GetComponent<HangmanManager>().ResetHangPlace();
-		gameModeScript.GetComponent<GameMode>().totalNumberOfWordsFound = 0;
-		_gamePlayCanvasPrefab.SetActive (false);
-		Destroy (_gameStateCanvas, 0);
-		_mainMenuCanvas.SetActive (true);
+//		gameModeScript.DeletePreviousWord ();
+//		gameModeScript.ResetPressedKeys ();
+//		_hangPlace.GetComponent<HangmanManager>().ResetHangPlace();
+//		gameModeScript.GetComponent<GameMode>().totalNumberOfWordsFound = 0;
+//		_gamePlayCanvasPrefab.SetActive (false);
+//		Destroy (_gameStateCanvas, 0);
+//		_mainMenuCanvas.SetActive (true);
+		_sceneLoader.LoadScene(MainMenuLevel);
 	}
+
+	public void PauseGame()
+	{
+		Time.timeScale = 0;
+	}
+
+	public void UnPauseGame()
+	{
+		Time.timeScale = 1;
+	}
+
 
 	
 }

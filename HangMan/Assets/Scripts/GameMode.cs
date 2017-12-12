@@ -50,7 +50,14 @@ public class GameMode : MonoBehaviour {
 	private float timeForOneChar;
 
 
-
+	void Start ()
+	{
+		Debug.Log ("Called");
+		gameManager = GameManager.instance;
+		gameManager.gameModeScript = this;
+		gameManager.InitializeRefrrences ();
+		StartGame ();
+	}
 	public void StartGame()
 	{
 		StartCoroutine("StartWithDelay");
@@ -58,6 +65,10 @@ public class GameMode : MonoBehaviour {
 
 	IEnumerator StartWithDelay()
 	{
+		Debug.Log ("sfsfsfsfsfsfsfsfsfsf");
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript> ().DisplayHighScore (gameManager.GetHighScore ());
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript> ().EnableableSettingPanel ();
+		yield return new WaitForSeconds (2f);
 		int numberOfCharactersInCurrentWord=ChooseWord ();
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().ResetAnswerPos();
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().ResetTime();
@@ -65,15 +76,19 @@ public class GameMode : MonoBehaviour {
 
 		yield return (SpawnBlankSpace(numberOfCharactersInCurrentWord));
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().AnimateKeysScaleUp();
-		TimeManagerScript.timeManagerScriptInstance.StartTimer(CalculateTimeNeeded(numberOfCharactersInCurrentWord));
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().DisplayTime();
-		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().DisplayHint();
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().DisplayHint(GameManager.instance.GetHintValue());
+
+		yield return new WaitForSeconds (2f);
+
+		TimeManagerScript.instance.StartTimer(CalculateTimeNeeded(numberOfCharactersInCurrentWord));
+
 		UpdateScore ();
 		isInGame=true;
 	}
 
 	public IEnumerator SpawnBlankSpace(int characterLength)
-	{
+	{	//dynamic size for x and fixed value for y
 		OutputPanel.GetComponent<RectTransform> ().sizeDelta = new Vector2 (characterLength * (textObj.GetComponent<RectTransform> ().sizeDelta.x + OutputPanel.GetComponent<HorizontalLayoutGroup> ().spacing), OutputPanel.GetComponent<RectTransform> ().sizeDelta.y);
 		textObjectsRef = new TextObjects[characterLength];
 
@@ -275,7 +290,8 @@ public class GameMode : MonoBehaviour {
 	{
 		isInGame=false;
 
-		TimeManagerScript.timeManagerScriptInstance.StopTimer();
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript> ().EnableableSettingPanel ();
+
 
 		wordFoundCount = wordFoundCount + 1;
 
@@ -283,6 +299,8 @@ public class GameMode : MonoBehaviour {
 		{
 			GameManager.instance.UpdateHintCount(GameManager.instance.GetHintValue()+1);
 		}
+
+		TimeManagerScript.instance.StopTimer();
 
 		UpdateScore();
 
@@ -298,7 +316,9 @@ public class GameMode : MonoBehaviour {
 	{
 		isInGame=false;
 
-		TimeManagerScript.timeManagerScriptInstance.StopTimer();
+		gamePlayCanvas.GetComponent<GamePlayCanvasScript> ().DisableSettingPanel ();
+
+		TimeManagerScript.instance.StopTimer();
 
 		DisplayCorrectWord();
 

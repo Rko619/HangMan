@@ -15,16 +15,6 @@ public class GameStateCanvasScript : MonoBehaviour {
     [SerializeField]
     private GameObject losePanel;
 
-	void Start ()
-    {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
 
     public void OnGameOver()
     {

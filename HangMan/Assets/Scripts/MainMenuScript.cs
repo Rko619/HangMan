@@ -19,6 +19,9 @@ public class MainMenuScript : MonoBehaviour {
     private bool isHintVisible = false;
     [SerializeField]
     private Text highScoreText;
+	[SerializeField]
+	private string gamePlayScene;
+
 
 
 
@@ -26,6 +29,7 @@ public class MainMenuScript : MonoBehaviour {
 	void Start()
 	{
 		highScoreText.text = "HIGHSCORE : " + GameManager.instance.GetHighScore ().ToString ();
+
 	}
     void OnEnable()
     {
@@ -37,7 +41,8 @@ public class MainMenuScript : MonoBehaviour {
     }
 	public void OnClickedPlayButton()
 	{
-		GameManager.instance.StartGame ();
+		SceneLoader.instance.LoadScene (gamePlayScene);
+		//GameManager.instance.StartGame ();
 	}
 	public void OnClickedSettingsButton()
 	{
@@ -103,4 +108,6 @@ public class MainMenuScript : MonoBehaviour {
             isSoundEnabled = true;
         }
     }
+
+
 }

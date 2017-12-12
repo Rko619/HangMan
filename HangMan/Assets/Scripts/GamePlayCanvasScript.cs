@@ -19,6 +19,8 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	[SerializeField]
 	private Text timerText;
 	[SerializeField]
+	private Text highScoreText;
+	[SerializeField]
 	private Text hintText;
 	[SerializeField]
 	private Button hintButton;
@@ -28,6 +30,8 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	private GameObject[] keys;
 	[SerializeField]
 	private Transform wordNormalPos,wordEndPos,answerTransform;
+	[SerializeField]
+	private GameObject settingsPanel;
 	private bool isSoundEnabled=true;
 
 
@@ -42,6 +46,10 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	void Start()
 	{
 		hintButton.onClick.AddListener (OnClickedHintButton);
+
+		GameManager.instance.onHighScoreChanged += DisplayHighScore;
+
+		GameManager.instance.onHintValueChanged += DisplayHint;
 	}
 
     public void OnClickedSpeakerButton()
@@ -62,19 +70,22 @@ public class GamePlayCanvasScript : MonoBehaviour {
 
 	public void OnClickedBackButton()
 	{
+		//pause a game using this line
+		GameManager.instance.PauseGame();
+
         backButtonObj.GetComponent<Image>().color = new Color(backButtonObj.GetComponent<Image>().color.g, backButtonObj.GetComponent<Image>().color.g, backButtonObj.GetComponent<Image>().color.b, 50);
         backButtonObj.GetComponent<Button>().interactable = false;
 		yesnoPanel.SetActive (true);
 	}
 	public void  OnClickedYesButton()
 	{
-		backButtonObj.GetComponent<Button>().interactable = true;
-		yesnoPanel.SetActive (false);
 		GameManager.instance.OnClickedMainMenuButton ();
-
 	}
 	public void  OnClickedNoButton()
 	{
+		//UnPause a Game using this line
+		GameManager.instance.UnPauseGame();
+
 		yesnoPanel.SetActive (false);
 		backButtonObj.GetComponent<Image>().color = new Color(backButtonObj.GetComponent<Image>().color.g, backButtonObj.GetComponent<Image>().color.g, backButtonObj.GetComponent<Image>().color.b, 255);
 		backButtonObj.GetComponent<Button>().interactable = true;
@@ -96,15 +107,15 @@ public class GamePlayCanvasScript : MonoBehaviour {
 
 	public void DisplayTime()
 	{
-		TimeManagerScript.timeManagerScriptInstance.OnTimerUpdated += UpdateTimeInfo;
-		TimeManagerScript.timeManagerScriptInstance.OnTimerFinished += onTimedOut;
+		TimeManagerScript.instance.OnTimerUpdated += UpdateTimeInfo;
+		TimeManagerScript.instance.OnTimerFinished += onTimedOut;
 		timerText.color =normalTimeColor;
 		isTimedOut = false;
 	}
 
 	void UpdateTimeInfo()
 	{
-		timerText.text = TimeManagerScript.timeManagerScriptInstance.currentTime.ToString();
+		timerText.text = TimeManagerScript.instance.currentTime.ToString();
 	}
 
 	void OnClickedHintButton()
@@ -115,7 +126,6 @@ public class GamePlayCanvasScript : MonoBehaviour {
 		GameManager.instance.gameModeScript.RevealChar();
 		GameManager.instance.UpdateHintCount(GameManager.instance.GetHintValue()-1);
 		}
-		DisplayHint();
 	}
 
 	void onTimedOut()
@@ -125,9 +135,14 @@ public class GamePlayCanvasScript : MonoBehaviour {
 		timerText.color = normalTimeColor;
 	}
 
-	public void DisplayHint()
+	public void DisplayHint(int hintValue)
 	{
 		hintText.text=GameManager.instance.GetHintValue().ToString();
+	}
+
+	public void DisplayHighScore(int _updatedScore)
+	{
+		highScoreText.text = "HIGHSCORE "+_updatedScore.ToString ();
 	}
 
 	public void AnimateKeysScaleDown()
@@ -171,6 +186,15 @@ public class GamePlayCanvasScript : MonoBehaviour {
 		timerText.text = "00:00";
 	}
 
+	public void DisableSettingPanel()
+	{
+		settingsPanel.SetActive (false);
+	}
+
+	public void EnableableSettingPanel()
+	{
+		settingsPanel.SetActive (true);
+	}
 	void OnDisable()
 	{
         //GameManager.instance.gameModeScript.CancelInvoke();

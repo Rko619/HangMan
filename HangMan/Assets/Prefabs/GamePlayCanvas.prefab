@@ -1245,6 +1245,7 @@ MonoBehaviour:
   yesnoPanel: {fileID: 1530563126377822}
   backButtonObj: {fileID: 1070747256731482}
   timerText: {fileID: 114839649265449286}
+  highScoreText: {fileID: 114689947243666022}
   hintText: {fileID: 114968471990858174}
   hintButton: {fileID: 114711915122842240}
   normalTimeColor: {r: 0.08235294, g: 0.38431373, b: 0.4509804, a: 1}
@@ -1278,6 +1279,7 @@ MonoBehaviour:
   wordNormalPos: {fileID: 224616767928196486}
   wordEndPos: {fileID: 224268427136839792}
   answerTransform: {fileID: 224521951803032994}
+  settingsPanel: {fileID: 1014729585508358}
 --- !u!114 &114062094068495210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3580,7 +3582,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 7
+  m_ChildAlignment: 4
   m_Spacing: 35
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -5248,7 +5250,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -523, y: 115.8999}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224548070869762226
 RectTransform:

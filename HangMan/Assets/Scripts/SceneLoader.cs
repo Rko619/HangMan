@@ -10,31 +10,49 @@ public class SceneLoader : MonoBehaviour
     public static SceneLoader instance;
 
 	[SerializeField]
-	private Image loadingBar; 
+	private float timeAfterLoad;
+	[SerializeField]
+	private GameObject loadingCanvas;
     // Use this for initialization
-    void Awake()
-    {
-        instance = this;
-		DontDestroyOnLoad (this.gameObject);
-	}
-   
+	void Awake()
+	{
+		//Check if instance already exists
+		if (instance == null)
 
-    public void LoadScene(string sceneName)
+			//if not, set instance to this
+			instance = this;
+
+		//If instance already exists and it's not this:
+		else if (instance != this)
+
+			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+			Destroy (gameObject);    
+
+		//Sets this to not be destroyed when reloading scene
+		DontDestroyOnLoad (gameObject);
+	}
+
+	public void LoadScene(string sceneName)
     {
-        StartCoroutine(LoadSceneAsync(sceneName));
+		StartCoroutine(LoadSceneAsync(sceneName));
     }
 
 	private IEnumerator LoadSceneAsync(string sceneName)
 	{
-        loadingBar.enabled = true;
+		//loadingCanvas.SetActive (true);
         AsyncOperation operation = SceneManager.LoadSceneAsync (sceneName);
-		while (!operation.isDone)
-		{
-			loadingBar.fillAmount = operation.progress;
-			yield return null;
-		}
-        loadingBar.enabled = false;
-        loadingBar.fillAmount = 0;
+		//operation.allowSceneActivation = false;
+
+//		while (!operation.isDone) 
+//		{
+//			//Debug.Log ("FAFAFA");
+//			if (operation.progress > 8f)
+//				break;
+//			yield return null;
+//		}
+		//Debug.Log ("loaded");
+		yield return new WaitForSeconds (0);
+
 	}
 
 }

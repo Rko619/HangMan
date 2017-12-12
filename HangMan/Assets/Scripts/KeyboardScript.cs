@@ -19,7 +19,6 @@ public class KeyboardScript : MonoBehaviour {
 
     void Start ()
     {
-		PlayerPrefs.SetInt("HintValue",1);
 		Button Key = GetComponent<Button> ();
 		Key.onClick.AddListener (SetInputKey);
 	}

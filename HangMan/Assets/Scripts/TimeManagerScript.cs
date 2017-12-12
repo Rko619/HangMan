@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimeManagerScript : MonoBehaviour {
 
-	public static TimeManagerScript timeManagerScriptInstance;
+	public static TimeManagerScript instance;
 	
 	public float currentTime;
 
@@ -18,12 +18,25 @@ public class TimeManagerScript : MonoBehaviour {
 	private bool canUpdateTime;
 	
 
-
-	void Start () 
+	void Awake()
 	{
-		timeManagerScriptInstance=this;	
+		//Check if instance already exists
+		if (instance == null)
+
+			//if not, set instance to this
+			instance = this;
+
+		//If instance already exists and it's not this:
+		else if (instance != this)
+
+			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+			Destroy (gameObject);    
+
+		//Sets this to not be destroyed when reloading scene
+		DontDestroyOnLoad (gameObject);
 	}
-	
+
+
 	void FixedUpdate () 
 	{
 		if(canUpdateTime)

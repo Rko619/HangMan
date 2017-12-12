@@ -52,5 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameModeScript: {fileID: 0}
-  _highScoreText: {fileID: 0}
   bgSoundName: BackgroundSound
+  MainMenuLevel: MainMenuScene
+  timeAfterLoad: 3

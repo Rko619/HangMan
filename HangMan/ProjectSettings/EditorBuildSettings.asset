@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Sandbox/MenuScene.unity
     guid: 20eb8f3f8819528409b9a7462393f8e4
   - enabled: 1
+    path: Assets/Scenes/_PreLoadScene.unity
+    guid: ae652b58363852e4e8934de4d1b6f55a
+  - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: c0549d4d969acc84fa755441864f707e
   - enabled: 1

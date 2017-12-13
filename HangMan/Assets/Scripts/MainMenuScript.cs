@@ -15,6 +15,10 @@ public class MainMenuScript : MonoBehaviour {
     private GameObject hintPanel;
     [SerializeField]
     private GameObject hintButtonObj;
+	[SerializeField]
+	private Button playButton;
+	[SerializeField]
+	private Button quitButton;
     private bool isSoundEnabled = true;
     private bool isHintVisible = false;
     [SerializeField]
@@ -74,7 +78,9 @@ public class MainMenuScript : MonoBehaviour {
         if (!isHintVisible)
         {
             hintButtonObj.GetComponent<Image>().color = new Color(hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.b, 50);
-            hintButtonObj.GetComponent<Button>().interactable = false;
+			hintButtonObj.GetComponent<Button> ().interactable = false;
+			playButton.interactable=false;
+			quitButton.interactable=false;
             hintPanel.SetActive(true);
             isHintVisible = true;
         }
@@ -82,6 +88,8 @@ public class MainMenuScript : MonoBehaviour {
         {
             hintPanel.SetActive(false);
             isHintVisible = false;
+			playButton.interactable=true;
+			quitButton.interactable=true;
         }
     }
     public void OnClickedHintCloseButton()
@@ -92,6 +100,8 @@ public class MainMenuScript : MonoBehaviour {
             isHintVisible = false;
             hintButtonObj.GetComponent<Image>().color = new Color(hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.g, hintButtonObj.GetComponent<Image>().color.b, 255);
             hintButtonObj.GetComponent<Button>().interactable = true;
+			playButton.interactable=true;
+			quitButton.interactable=true;
         }
     }
 

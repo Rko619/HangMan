@@ -79,6 +79,9 @@ public class GamePlayCanvasScript : MonoBehaviour {
 	}
 	public void  OnClickedYesButton()
 	{
+		//need to unpause game because now the time scale is 0
+		yesnoPanel.SetActive (false);
+		GameManager.instance.UnPauseGame();
 		GameManager.instance.OnClickedMainMenuButton ();
 	}
 	public void  OnClickedNoButton()
@@ -115,7 +118,10 @@ public class GamePlayCanvasScript : MonoBehaviour {
 
 	void UpdateTimeInfo()
 	{
-		timerText.text = TimeManagerScript.instance.currentTime.ToString();
+		if (timerText)
+		{
+			timerText.text = TimeManagerScript.instance.currentTime.ToString ();
+		}
 	}
 
 	void OnClickedHintButton()
@@ -130,7 +136,7 @@ public class GamePlayCanvasScript : MonoBehaviour {
 
 	void onTimedOut()
 	{
-		//timerText.text = "00:00";
+		timerText.text = "00:00";
 		isTimedOut = true;
 		timerText.color = normalTimeColor;
 	}
@@ -168,9 +174,9 @@ public class GamePlayCanvasScript : MonoBehaviour {
      	 Vector3 startingPos = transform.position;
     	 while (elapsedTime < time)
      	{
-         answerTransform.position = Vector3.Slerp(answerTransform.position, wordEndPos.position, (elapsedTime / time));
-         elapsedTime += Time.deltaTime;
-         yield return null;
+			answerTransform.position = Vector3.Lerp(answerTransform.position, wordEndPos.position, (elapsedTime / time));
+         	elapsedTime += Time.deltaTime;
+        	yield return null;
 		 }
 
 		yield return new WaitForSeconds(0f);

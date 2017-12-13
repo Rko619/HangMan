@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\KeyboardScript.cs" />
      <Compile Include="Assets\Scripts\MainMenuScript.cs" />
      <Compile Include="Assets\Scripts\OutputPanelScript.cs" />
+     <Compile Include="Assets\Scripts\PreLoadSceneScript.cs" />
      <Compile Include="Assets\Scripts\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\TextObjScript.cs" />
      <Compile Include="Assets\Scripts\TimeManagerScript.cs" />

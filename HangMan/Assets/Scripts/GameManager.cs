@@ -177,6 +177,7 @@ public  class GameManager : MonoBehaviour {
 //		Destroy (_gameStateCanvas, 0);
 //		_mainMenuCanvas.SetActive (true);
 		_sceneLoader.LoadScene(MainMenuLevel);
+
 	}
 
 	public void PauseGame()

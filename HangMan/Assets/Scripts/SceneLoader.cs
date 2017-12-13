@@ -8,7 +8,7 @@ public class SceneLoader : MonoBehaviour
 {
 
     public static SceneLoader instance;
-
+	
 	[SerializeField]
 	private float timeAfterLoad;
 	[SerializeField]
@@ -34,24 +34,31 @@ public class SceneLoader : MonoBehaviour
 
 	public void LoadScene(string sceneName)
     {
-		StartCoroutine(LoadSceneAsync(sceneName));
+		StartCoroutine(LoadSceneAsync(sceneName,true));
     }
 
-	private IEnumerator LoadSceneAsync(string sceneName)
+	public void LoadScene(string sceneName,bool isShowLoadingScreen)
 	{
-		//loadingCanvas.SetActive (true);
-        AsyncOperation operation = SceneManager.LoadSceneAsync (sceneName);
-		//operation.allowSceneActivation = false;
+		StartCoroutine(LoadSceneAsync(sceneName,isShowLoadingScreen));
+	}
 
-//		while (!operation.isDone) 
-//		{
-//			//Debug.Log ("FAFAFA");
-//			if (operation.progress > 8f)
-//				break;
-//			yield return null;
-//		}
-		//Debug.Log ("loaded");
-		yield return new WaitForSeconds (0);
+	private IEnumerator LoadSceneAsync(string sceneName,bool isShowLoadingScreen)
+	{
+		if (isShowLoadingScreen) 
+		{
+			loadingCanvas.SetActive (true);
+		}
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync (sceneName);
+		operation.allowSceneActivation = false;
+
+		while (operation.progress<.9f) 
+		{
+			yield return null;
+		}
+		operation.allowSceneActivation = true;
+		yield return new WaitForSeconds (timeAfterLoad);
+		loadingCanvas.SetActive (false);
 
 	}
 

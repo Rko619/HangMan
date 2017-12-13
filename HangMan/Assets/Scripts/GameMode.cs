@@ -52,7 +52,6 @@ public class GameMode : MonoBehaviour {
 
 	void Start ()
 	{
-		Debug.Log ("Called");
 		gameManager = GameManager.instance;
 		gameManager.gameModeScript = this;
 		gameManager.InitializeRefrrences ();
@@ -60,21 +59,23 @@ public class GameMode : MonoBehaviour {
 	}
 	public void StartGame()
 	{
-		StartCoroutine("StartWithDelay");
+		IEnumerator i = StartWithDelay();
+		StartCoroutine(i);
 	}
 
 	IEnumerator StartWithDelay()
 	{
-		Debug.Log ("sfsfsfsfsfsfsfsfsfsf");
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript> ().DisplayHighScore (gameManager.GetHighScore ());
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript> ().EnableableSettingPanel ();
-		yield return new WaitForSeconds (2f);
+
+		yield return new WaitForSeconds (3f);
+
 		int numberOfCharactersInCurrentWord=ChooseWord ();
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().ResetAnswerPos();
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().ResetTime();
 		
-
 		yield return (SpawnBlankSpace(numberOfCharactersInCurrentWord));
+
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().AnimateKeysScaleUp();
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().DisplayTime();
 		gamePlayCanvas.GetComponent<GamePlayCanvasScript>().DisplayHint(GameManager.instance.GetHintValue());
@@ -89,6 +90,7 @@ public class GameMode : MonoBehaviour {
 
 	public IEnumerator SpawnBlankSpace(int characterLength)
 	{	//dynamic size for x and fixed value for y
+		//Debug.Log ("SpawnBlank Called");
 		OutputPanel.GetComponent<RectTransform> ().sizeDelta = new Vector2 (characterLength * (textObj.GetComponent<RectTransform> ().sizeDelta.x + OutputPanel.GetComponent<HorizontalLayoutGroup> ().spacing), OutputPanel.GetComponent<RectTransform> ().sizeDelta.y);
 		textObjectsRef = new TextObjects[characterLength];
 
@@ -195,6 +197,7 @@ public class GameMode : MonoBehaviour {
 
 	int  ChooseWord()
 	{
+		//Debug.Log ("ChooseWord Called");
         if (!isWordLoadedFromDB)
 		{
          wordArray = DBReaderWriter.ReadFromDB();
